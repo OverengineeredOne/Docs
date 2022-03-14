@@ -17,23 +17,33 @@ along with the book.
 
 First update your existing packages by running this in your terminal session.
 
-    sudo apt update
+```rust,ignore
+sudo apt update
+```
 
 Next install the prerequisites
 
+```rust,ignore
     sudo apt install apt-transport-https ca-certificates curl software-properties-common
+```
 
 Add the GPG key for the Docker repository
 
+```rust,ignore
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
 
 Add the docker repositories 
 
+```rust,ignore
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+```
 
 Install docker
 
+```rust,ignore
     sudo apt install docker-ce
+```
 
 NOTE: These steps likely can wrapped in a bash script and completed in a single step. Host on
 https://github.com/overengineered/
