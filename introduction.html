@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Overengineered Developer Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overengineered</a></li><li class="chapter-item expanded affix "><a href="preface.html">Preface</a></li><li class="chapter-item expanded affix "><a href="introduction.html" class="active">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.</strong> Development Environment</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.2.</strong> Overengineered CLI Tool</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> WebAssembly</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Yew</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Component Library</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Todo App</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Launch with Rocket</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Hosting a Yew App</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Adding GraphQL</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Packaging Rocket Server</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">4.1.</strong> Connecting to Docker</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.2.</strong> Optimizing Docker Image</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Configuring the Cloud</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">5.1.</strong> Setting up the Master Node</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.2.</strong> Adding new nodes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.3.</strong> Persistant Storage</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.4.</strong> Hosting with Kubectl</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.5.</strong> Converting to a Helm Chart</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.6.</strong> Deploy to Cloud with Flux</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Services</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">6.1.</strong> Kubernetes Service Library</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.2.</strong> Logging</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.3.</strong> Krustlet</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Graph Abstraction Layer</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">7.1.</strong> Storage</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.2.</strong> Nodes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.3.</strong> Edges</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.4.</strong> Search</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.5.</strong> Security</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.6.</strong> Privacy</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.7.</strong> GraphQL</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.8.</strong> Publishing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Apps</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">8.1.</strong> Authentication</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.2.</strong> Plugins</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.3.</strong> Hacking</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Overengineered Developer Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Overengineered is here to help you develop fast, efficient, and safe decentralized, apps. We 
+accomplish this by providing a easy to install <em>cloud at home</em>, where decentralized services can 
+be installed as easy as it is to install an app on your phone. </p>
+<p>A GraphQL <em>data abstraction service</em> and decentralized <em>registries</em> are provided to help
+distribute data schemas. Progressive Web Apps are able to request the data service to download and 
+install the required schema.</p>
+<p>This should enable developers to move quickly to implement new products and features. We also
+provide all the glue needed to develop within this environment in an easy and cohesive manor.</p>
+<h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
+<p>In the spirit of trying to create a safe and secure platform that treats data ownership as a first
+class feature; Rust feels like a natural fit. </p>
+<p>The current state of many of the dependencies are not considered stable, our platform will not be 
+considered stable or backwards compatible. These guarantees will likely evolve over time, but for 
+now expect rapid breaking changes.</p>
+<h2 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h2>
+<p>This book is for any programmer or engineer that wants to learn about modern web programming
+and how this landscape is changing with the next generation of the internet. </p>
+<h2 id="how-to-use-this-book"><a class="header" href="#how-to-use-this-book">How to use this book.</a></h2>
+<p>When writing this book we have no expectations on the audience. In the earlier chapiters We try to
+structure the text such that you can easily skim sections based on your knowledge and expertise.
+Some sections may require spending time following up on the additional resources. </p>
+<p>Later in the book we'll be taking a deep dive into some of the services and libraries we've 
+built to make development easier.</p>
+<h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
+<p>The source files from this book can be found on <a href="https://github.com/overengineered/">GitHub</a> and 
+will be found prefixed with <code>[Developer Book][Chapter][Section] - Title</code></p>
+<h2 id="stack"><a class="header" href="#stack">Stack</a></h2>
+<p>Briefly let's cover the stack that we will be working with. Later we'll have a gentle introduction 
+to many of them and others may not require direct interaction with, it may be important to know.</p>
+<p>You can follow up on these at anytime to learn more.</p>
+<h3 id="frontend"><a class="header" href="#frontend">Frontend</a></h3>
+<ul>
+<li><strong>Yew</strong> - Yew is a rust crate similar to <a href="https://reactjs.org/">react</a>. Working with Yew feels 
+much like working with react.</li>
+<li><strong>GraphQL</strong> - <a href="https://graphql.org/">GraphQL</a> was chosen as the primary server / client 
+interaction to minimize network traffic. With the ever growing number of devices we want to keep 
+payloads as small as possible.  GraphQL provides a very nice abstraction for developers and has 
+existing client libraries for many languages.</li>
+</ul>
+<h3 id="backend"><a class="header" href="#backend">Backend</a></h3>
+<h4 id="webserver"><a class="header" href="#webserver">Webserver</a></h4>
+<ul>
+<li><strong>Rocket</strong> - <a href="https://rocket.rs/">Rocket</a> is the primary recommended way to create a web server. 
+Rocket is a rust crate that focuses on a great developer experience with an easy to use API. We 
+think this fits perfectly with what we are trying to accomplish.</li>
+<li><strong>GraphQL</strong> - Like previously mentioned for various reasons we use GraphQL. GraphQL is very easy 
+to integrate with Rocket.</li>
+</ul>
+<h3 id="devops"><a class="header" href="#devops">DevOps</a></h3>
+<ul>
+<li><strong>Docker</strong> - We primarily use <a href="https://docker.com/">Docker</a> for the build tools, but primarily 
+use <a href="https://containerd.io/">Containard</a> for the container service.</li>
+<li><strong>Kubernetes</strong> - <a href="https://kubernetes.io/">Kubernetes</a> is a container orchestration service to 
+manage containers across all devices within your network. We specifically use 
+<a href="https://k3s.io/">k3s</a> since it supports the arm architecture and can easily be ran on Raspberry 
+Pi to enable low cost hardware and low power consumption.</li>
+<li><strong>Template Cluster K3s</strong> - An <a href="https://github.com/k8s-at-home/template-cluster-k3s">opinionated</a>
+template for deploying a single k3s cluster.
+<ul>
+<li><strong>Ansible</strong> - <a href="https://ansible.com/">Ansible</a> is an automation platform for managing 
+automation across devices.</li>
+<li><strong>Terraform</strong> - <a href="https://terraform.io/">Terraform</a> provides infrastructure as code. We 
+use it for managing the Cloudflare domain.</li>
+<li><strong>Flux</strong> - <a href="https://fluxcd.io/docs/">Flux</a> is a tool for keeping the Kubernetes cluster 
+in sync with the code repository.</li>
+<li><strong>SOPS</strong> - <a href="https://github.com/mozilla/sops">SOPS</a> is a tool for managing private data 
+such as passwords and private information within the configuration files that will be 
+checked int source control.</li>
+<li><strong>Cloudflare</strong> - <a href="https://cloudflare.com/">Cloudflare</a> manages domain and updates the 
+DNS.</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="preface.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="getting-started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="preface.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="getting-started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

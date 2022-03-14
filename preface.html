@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Preface - Overengineered Developer Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overengineered</a></li><li class="chapter-item expanded affix "><a href="preface.html" class="active">Preface</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.</strong> Development Environment</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.2.</strong> Overengineered CLI Tool</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> WebAssembly</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Yew</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Component Library</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.</strong> Todo App</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Launch with Rocket</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Hosting a Yew App</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Adding GraphQL</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Packaging Rocket Server</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">4.1.</strong> Connecting to Docker</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.2.</strong> Optimizing Docker Image</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Configuring the Cloud</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">5.1.</strong> Setting up the Master Node</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.2.</strong> Adding new nodes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.3.</strong> Persistant Storage</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.4.</strong> Hosting with Kubectl</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.5.</strong> Converting to a Helm Chart</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.6.</strong> Deploy to Cloud with Flux</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Services</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">6.1.</strong> Kubernetes Service Library</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.2.</strong> Logging</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.3.</strong> Krustlet</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Graph Abstraction Layer</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">7.1.</strong> Storage</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.2.</strong> Nodes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.3.</strong> Edges</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.4.</strong> Search</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.5.</strong> Security</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.6.</strong> Privacy</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.7.</strong> GraphQL</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.8.</strong> Publishing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Apps</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">8.1.</strong> Authentication</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.2.</strong> Plugins</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.3.</strong> Hacking</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Overengineered Developer Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="preface"><a class="header" href="#preface">Preface</a></h1>
+<p>Before we get started I wanted to give you a little background on Overengineered and some of the 
+original problems that set out to solve. This will help set the direction and tone of the
+text.</p>
+<p>First, why Overengineered? We'll it embodies the spirit of <em>&quot;I'll spend four hours automating a 
+task that takes fifteen minutes to complete.&quot;</em> In the end the most important thing is that we 
+learned something and are having fun. </p>
+<p>Now what defines our platform and vision is a little more complicated. It mainly derives from a
+few different things inspired by my career.</p>
+<p>I've worked within a large tech company for the last ten years solving problems of various scale. 
+My strength has always been solving problems that drastically increase operational and development
+efficiency across the company. Within a product company we're often highly well tuned engines.
+Outside of software engineering, we're data science, data engineering, production engineering, 
+user experience research, user research, language design all working to identify and tackle 
+problems that essentially saves the most amount of cognitive or physical work. This essentially 
+allows entire organizations to maintain minimal budget increases year over year as the number of 
+end users within products scale to billions of users and trillions of transactions.</p>
+<p>This has always been a problem with my personal projects when I try to have direct impact in my 
+life. I have accumulated a large number of unfinished products to tackle some minor problems.
+But often the real world problems I'd like to tackle that will have a substantial impact to my 
+household budgeting, or optimizing my time spent on daily errands, or chores. The scope is solving 
+some of these problems is substantial and it's unfortunate that there is not a way I can hack a 
+solution together and get a product distributed within a weekend. I end up burning a significant 
+amount of calories planning, budgeting materials and costs, setting up my infrastructure, writing 
+the glue code between services or devices.</p>
+<p>More often than not I end up in a debate with myself if I should use a cloud service or spend the 
+extra effort to build or find my own solution.</p>
+<p>The other driving factors that influence Overengineered are the general populations sentiment 
+towards technology companies and tech. To me, the driving factor of this seems to be trust. People
+want their data secure, protected, private, and available. Blockchain attempts to solve this 
+problem. It is a great tool and has a purpose, but is generally to expensive and slow to be used
+everywhere.</p>
+<p>So, I asked myself, why not bring the cloud infrastructure home? Make it as easy as Installing an
+operating system. Adding a new computer or device is as easy as scanning a QR code. This is 
+prefect for running facial recognition on security cameras within the house. Or tracking 
+individuals throughout the house to apply individualized home automation and contextual 
+interaction with IoT devices. This is not the type of data my wife feels safe traveling outside a 
+private closed network, where we have tight privacy policies based on who is in the video.</p>
+<p>The next question this leads to is, how do we easily distribute apps that would use a private
+cloud? The first thing that comes to mind is Helm, but that requires someone involved who has 
+knowledge on how Kubernetes works and how to set up these applications. Why not provide a data 
+service and abstraction that can download data and manage schemas from public registries.</p>
+<p>Progressive web apps can connect to any hosted data service and request for an install of the 
+required data schemas for the app to function. This public and transparent data model approach has 
+the added benefit of creating a large data graph. Other abstractions can be made on top to provide 
+a federated learning platform. </p>
+<p>Not only could this enrich the value of user data to something beyond whats easily attainable 
+today. But gives the true owner of the data power and the ability to monetize their own anonymized
+data in a safe and secure manor.</p>
+<p>This defines our north stars or what we aim to achieve. This is a long term vision and much of 
+this will inevitably change. Through the text You may find developer notes describing an approach 
+to solving some of developer experience challenges. If your interested in contributing 
+towards these areas. Feel free to open an issue to kick off the discussion.</p>
+<p>-- Sean O'Rourke</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
