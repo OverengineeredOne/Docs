@@ -16,8 +16,8 @@ jobs:
         with:
           toolchain: stable
       - run: (test -x $HOME/.cargo/bin/mdbook || cargo install --vers "^0.4" mdbook)
-        working-directory: ./developer-guide
       - run: mdbook build && mdbook test 
+        working-directory: developer-guide
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # The branch the action should deploy to.
