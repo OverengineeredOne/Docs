@@ -18,7 +18,7 @@ along with the book.
 We've created a convenience script to get you set up with docker more quickly. Go ahead and copy 
 paste this into your terminal.
 
-```
+```rust,ignore
 wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/main/debian.sh | bash
 ```
 
