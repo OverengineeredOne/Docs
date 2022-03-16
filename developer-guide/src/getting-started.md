@@ -15,38 +15,15 @@ along with the book.
 
 ### Set up Docker
 
-First update your existing packages by running this in your terminal session.
+We've created a convenience script to get you set up with docker more quickly. Go ahead and copy 
+paste this into your terminal.
 
-```rust,ignore
-sudo apt update
+```
+wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/main/debian.sh | bash
 ```
 
-Next install the prerequisites
-
-```rust,ignore
-    sudo apt install apt-transport-https ca-certificates curl software-properties-common
-```
-
-Add the GPG key for the Docker repository
-
-```rust,ignore
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-```
-
-Add the docker repositories 
-
-```rust,ignore
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-```
-
-Install docker
-
-```rust,ignore
-    sudo apt install docker-ce
-```
-
-NOTE: These steps likely can wrapped in a bash script and completed in a single step. Host on
-https://github.com/overengineered/
+If you find any issues with the script, please, fill out an issue on 
+[github](https://github.com/OverengineeredOne/easy-docker-setup)
 
 ### Set up Overengineered
 
@@ -54,11 +31,23 @@ https://github.com/overengineered/
 
 TODO: Create instructions for mac
 
+### Set up Docker
+
+### Set up Overengineered
+
 ## Raspbian (Raspberry Pi)
 
 TODO: Create instructions for Raspberry Pi, similar to Ubuntu but a single install script.
+
+### Set up Docker
+
+### Set up Overengineered
 
 ## Windows
 
 TODO: Create instructions for Windows, likely will set up a Ubuntu VM in hypervisor. Contribution 
 ideas welcome.
+
+### Set up Docker
+
+### Set up Overengineered
