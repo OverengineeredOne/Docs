@@ -152,31 +152,26 @@ We use Ubuntu as the base image and comes with all the tools required to be inst
 along with the book.</p>
 <h2 id="debian--ubuntu"><a class="header" href="#debian--ubuntu">Debian / Ubuntu</a></h2>
 <h3 id="set-up-docker"><a class="header" href="#set-up-docker">Set up Docker</a></h3>
-<p>First update your existing packages by running this in your terminal session.</p>
-<pre><code class="language-rust ignore">sudo apt update
+<p>We've created a convenience script to get you set up with docker more quickly. Go ahead and copy 
+paste this into your terminal.</p>
+<pre><code class="language-rust ignore">wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/main/debian.sh | bash
 </code></pre>
-<p>Next install the prerequisites</p>
-<pre><code class="language-rust ignore">    sudo apt install apt-transport-https ca-certificates curl software-properties-common
-</code></pre>
-<p>Add the GPG key for the Docker repository</p>
-<pre><code class="language-rust ignore">    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-</code></pre>
-<p>Add the docker repositories </p>
-<pre><code class="language-rust ignore">    sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable&quot;
-</code></pre>
-<p>Install docker</p>
-<pre><code class="language-rust ignore">    sudo apt install docker-ce
-</code></pre>
-<p>NOTE: These steps likely can wrapped in a bash script and completed in a single step. Host on
-https://github.com/overengineered/</p>
+<p>If you find any issues with the script, please, fill out an issue on 
+<a href="https://github.com/OverengineeredOne/easy-docker-setup">github</a></p>
 <h3 id="set-up-overengineered"><a class="header" href="#set-up-overengineered">Set up Overengineered</a></h3>
 <h2 id="mac-os-x"><a class="header" href="#mac-os-x">Mac OS X</a></h2>
 <p>TODO: Create instructions for mac</p>
+<h3 id="set-up-docker-1"><a class="header" href="#set-up-docker-1">Set up Docker</a></h3>
+<h3 id="set-up-overengineered-1"><a class="header" href="#set-up-overengineered-1">Set up Overengineered</a></h3>
 <h2 id="raspbian-raspberry-pi"><a class="header" href="#raspbian-raspberry-pi">Raspbian (Raspberry Pi)</a></h2>
 <p>TODO: Create instructions for Raspberry Pi, similar to Ubuntu but a single install script.</p>
+<h3 id="set-up-docker-2"><a class="header" href="#set-up-docker-2">Set up Docker</a></h3>
+<h3 id="set-up-overengineered-2"><a class="header" href="#set-up-overengineered-2">Set up Overengineered</a></h3>
 <h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
 <p>TODO: Create instructions for Windows, likely will set up a Ubuntu VM in hypervisor. Contribution 
 ideas welcome.</p>
+<h3 id="set-up-docker-3"><a class="header" href="#set-up-docker-3">Set up Docker</a></h3>
+<h3 id="set-up-overengineered-3"><a class="header" href="#set-up-overengineered-3">Set up Overengineered</a></h3>
 
                     </main>
 
