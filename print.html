@@ -294,13 +294,29 @@ We use Ubuntu as the base image and comes with all the tools required to be inst
 along with the book.</p>
 <h2 id="debian--ubuntu"><a class="header" href="#debian--ubuntu">Debian / Ubuntu</a></h2>
 <h3 id="set-up-docker"><a class="header" href="#set-up-docker">Set up Docker</a></h3>
-<p>We've created a convenience script to get you set up with docker more quickly. Go ahead and copy 
+<p>You can find install instructions for ubuntu at 
+<a href="https://docs.docker.com/engine/install/ubuntu/">docs.docker.com</a>. To make tihs process even 
+easier We've created a convenience script to get you set up with docker quickly. Go ahead and copy 
 paste this into your terminal.</p>
 <pre><code class="language-rust ignore">wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/main/debian.sh | bash
 </code></pre>
 <p>If you find any issues with the script, please, fill out an issue on 
 <a href="https://github.com/OverengineeredOne/easy-docker-setup">github</a></p>
 <h3 id="set-up-overengineered"><a class="header" href="#set-up-overengineered">Set up Overengineered</a></h3>
+<p>Everything's shiny captain, a development environment doesn't exist yet. If you read a head you 
+can build the current state from the source.</p>
+<h3 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h3>
+<p>Since the entire development environment is a container image, we can download the source from 
+github and build it our selves.</p>
+<p>For this we'll need to make sure we have git installed.</p>
+<pre><code class="language-rust ignore">apt install git-all
+</code></pre>
+<p>Next clone the repository and navigate into the new directory.</p>
+<pre><code class="language-rust ignore">    git clone https://github.com/OverengineeredOne/oedev.git &amp;&amp; cd oedev
+</code></pre>
+<p>Finally just build the image!</p>
+<pre><code class="language-rust ignore">    docker build -t oedev .
+</code></pre>
 <h2 id="mac-os-x"><a class="header" href="#mac-os-x">Mac OS X</a></h2>
 <p>TODO: Create instructions for mac</p>
 <h3 id="set-up-docker-1"><a class="header" href="#set-up-docker-1">Set up Docker</a></h3>
