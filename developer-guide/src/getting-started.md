@@ -39,15 +39,21 @@ github and build it our selves.
 
 For this we'll need to make sure we have git installed.
 
-    apt install git-all
+```rust,ignore
+apt install git-all
+```
 
 Next clone the repository and navigate into the new directory.
 
+```rust,ignore
     git clone https://github.com/OverengineeredOne/oedev.git && cd oedev
+```
 
 Finally just build the image!
 
+```rust,ignore
     docker build -t oedev .
+```
 
 
 ## Mac OS X
