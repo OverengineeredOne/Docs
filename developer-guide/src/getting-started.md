@@ -15,7 +15,9 @@ along with the book.
 
 ### Set up Docker
 
-We've created a convenience script to get you set up with docker more quickly. Go ahead and copy 
+You can find install instructions for ubuntu at 
+[docs.docker.com](https://docs.docker.com/engine/install/ubuntu/). To make tihs process even 
+easier We've created a convenience script to get you set up with docker quickly. Go ahead and copy 
 paste this into your terminal.
 
 ```rust,ignore
@@ -26,6 +28,27 @@ If you find any issues with the script, please, fill out an issue on
 [github](https://github.com/OverengineeredOne/easy-docker-setup)
 
 ### Set up Overengineered
+
+Everything's shiny captain, a development environment doesn't exist yet. If you read a head you 
+can build the current state from the source.
+
+### Building from source
+
+Since the entire development environment is a container image, we can download the source from 
+github and build it our selves.
+
+For this we'll need to make sure we have git installed.
+
+    apt install git-all
+
+Next clone the repository and navigate into the new directory.
+
+    git clone https://github.com/OverengineeredOne/oedev.git && cd oedev
+
+Finally just build the image!
+
+    docker build -t oedev .
+
 
 ## Mac OS X
 
