@@ -46,13 +46,13 @@ apt install git-all
 Next clone the repository and navigate into the new directory.
 
 ```rust,ignore
-    git clone https://github.com/OverengineeredOne/oedev.git && cd oedev
+git clone https://github.com/OverengineeredOne/oedev.git && cd oedev
 ```
 
 Finally just build the image!
 
 ```rust,ignore
-    docker build -t oedev .
+docker build -t oedev .
 ```
 
 
