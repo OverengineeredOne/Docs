@@ -6,8 +6,8 @@
 
 ## Getting Started
 - [Getting Started](./getting-started.md)
-	- [Development Environment]()
-	- [Overengineered CLI Tool]()
+	- [Development Environment](./development-env.md)
+	- [Overengineered CLI Tool](./oecli.md)
 - [WebAssembly]()
 	- [Yew]()
 	- [Component Library]()
