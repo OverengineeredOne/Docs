@@ -2,3 +2,26 @@
 
 The development environment ships with a command line tool to help take care of a lot of the 
 boilerplate and configuration within Overengineered.
+
+This tool is not meant to replace existing command line tools, but address common tasks such as, 
+setting up a new cloud, set up a new progressive web app, and setting up boilerplate templates for
+cloud apps.
+
+If you are using the Overengineered Development Environment the CLI comes preinstalled and can be 
+accessed with `oecli`.
+
+For more details on the specific command line options that are available you can use the help 
+section.
+
+```rust,ignore
+oecli --help
+```
+
+### Manual Installation
+
+If you are not within the Overengineered dev environment you can install `oecli` through Cargo.
+
+```rust,ignore
+cargo install oecli
+```
+

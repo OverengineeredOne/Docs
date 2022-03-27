@@ -1,12 +1,12 @@
 # Overengineered Docs
 
-At Overengineered we build developer and user productivity tools. We want to enable engineers, 
-programmers, developers, data scientists, anyone really, with a platform where they can move 
-quickly without having to get bogged down by anything outside of problem solving and 
-implementation.
+At Overengineered we build developer and user productivity tools. We want to enable people
+with a platform where they can move quickly without having to get bogged down by anything outside 
+of problem solving and implementation.
 
-The docs are broken down into two [mdBooks](https://rust-lang.github.io/mdBook/index.html). 
-One an end user guide (*Does not exist*) and a developer guide.
+We currently have the first developer [mdBooks](https://rust-lang.github.io/mdBook/index.html) in 
+progress. You can start reading here on Github. 
+[https://overengineeredone.github.io/docs/](https://overengineeredone.github.io/docs/)
 
 ### Contributions
 
