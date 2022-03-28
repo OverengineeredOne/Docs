@@ -4,8 +4,8 @@ The development environment ships with a command line tool to help take care of 
 boilerplate and configuration within Overengineered.
 
 This tool is not meant to replace existing command line tools, but address common tasks such as, 
-setting up a new cloud, set up a new progressive web app, and setting up boilerplate templates for
-cloud apps.
+setting up a new cloud, set up a new progressive web app, setting up boilerplate templates,
+installing, and uploading apps to repositories.
 
 If you are using the Overengineered Development Environment the CLI comes preinstalled and can be 
 accessed with `oecli`.

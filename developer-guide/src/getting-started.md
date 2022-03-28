@@ -4,16 +4,15 @@ Let's get started! We'll start by installing all the prerequisites then dive int
 pieces of Overengineered.
 
 To ensure rapid development we want to minimize the setup times for your development environment 
-and tools to follow along with the book as much as possible.
-
-We accomplish this by utilizing docker and in the future will provide a web based environment. 
-We use Ubuntu as the base image and comes with all the tools required to be installed to follow 
-along with the book.
-
-## Debian / Ubuntu
+and tools. We accomplish this by utilizing docker and in the future will provide a web based 
+environment. We will go into more detail in the following chapters, but for now know, Our image 
+has Ubuntu as the base image. Also comes with all the tools preinstalled to follow along with the
+book.
 
 
-### Set up Docker
+## Installing Docker
+
+### Ubuntu and Debian based OS including Raspberry Pi
 
 You can find install instructions for ubuntu at 
 [docs.docker.com](https://docs.docker.com/engine/install/ubuntu/). To make tihs process even 
@@ -27,12 +26,17 @@ wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/
 If you find any issues with the script, please, fill out an issue on 
 [github](https://github.com/OverengineeredOne/easy-docker-setup)
 
-### Set up Overengineered
+#### Set up Overengineered
 
 Everything's shiny captain, a development environment doesn't exist yet. If you read a head you 
 can build the current state from the source.
 
-### Building from source
+### Mac Os X
+
+### Windows
+
+
+## Building from source
 
 Since the entire development environment is a container image, we can download the source from 
 github and build it our selves.
@@ -49,34 +53,9 @@ Next clone the repository and navigate into the new directory.
 git clone https://github.com/OverengineeredOne/oedev.git && cd oedev
 ```
 
-Finally just build the image!
+Finally just build the image! This part may take some time.
 
 ```rust,ignore
 docker build -t oedev .
 ```
 
-
-## Mac OS X
-
-TODO: Create instructions for mac
-
-### Set up Docker
-
-### Set up Overengineered
-
-## Raspbian (Raspberry Pi)
-
-TODO: Create instructions for Raspberry Pi, similar to Ubuntu but a single install script.
-
-### Set up Docker
-
-### Set up Overengineered
-
-## Windows
-
-TODO: Create instructions for Windows, likely will set up a Ubuntu VM in hypervisor. Contribution 
-ideas welcome.
-
-### Set up Docker
-
-### Set up Overengineered

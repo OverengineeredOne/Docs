@@ -1,71 +1,91 @@
 # Introduction
 
-Overengineered is here to help you develop fast, efficient, and safe decentralized, apps. We 
-accomplish this by providing a easy to install *cloud at home*, where decentralized services can 
-be installed as easy as it is to install an app on your phone. 
+Overengineered is here to help you develop fast, efficient, and safe decentralized apps. We 
+accomplish this by providing an easy to install *cloud at home*, where decentralized services can 
+be installed like an app on your phone.
 
 A GraphQL *data abstraction service* and decentralized *registries* are provided to help
-distribute data schemas. Progressive Web Apps are able to request the data service to download and 
-install the required schema.
+distribute data schemas. Progressive Web Apps provide requirements to the abstraction service that
+can then be fetched and installed from the registry.
 
 This should enable developers to move quickly to implement new products and features. We also
-provide all the glue needed to develop within this environment in an easy and cohesive manor.
+want to provide all the glue needed to develop within this environment in a cohesive manor.
 
 ## Rust
 
 In the spirit of trying to create a safe and secure platform that treats data ownership as a first
 class feature; Rust feels like a natural fit. 
 
-The current state of many of the dependencies are not considered stable, our platform will not be 
-considered stable or backwards compatible. These guarantees will likely evolve over time, but for 
-now expect rapid breaking changes.
+Note that the current state of many of the dependencies are not considered stable. Therefore our 
+platform will not be considered stable or support backwards compatability between versions. These 
+guarantees will likely evolve over time, but for now expect rapid breaking changes.
 
 ## Who is this book for?
 
-This book is for any programmer or engineer that wants to learn about modern web programming
-and how this landscape is changing with the next generation of the internet. 
+This book has no expectations on the audience's background. It is ideal for any developer who 
+wants to quickly deliver decentralized apps or who are just to see how this landscape is changing 
+with the next generation of the internet. 
 
 ## How to use this book.
 
-When writing this book we have no expectations on the audience. In the earlier chapiters We try to
-structure the text such that you can easily skim sections based on your knowledge and expertise.
-Some sections may require spending time following up on the additional resources. 
+We try to structure the book so you get introduced to a new topic with a little background before 
+moving into our solution to solving particular challenges. Finally we'll include additional 
+information for followup reading and often a project.
 
-Later in the book we'll be taking a deep dive into some of the services and libraries we've 
-built to make development easier.
+Thoughout the book we'll be developing and breaking down a simple todo app, where we slowly 
+introduce more and more features as we shape it to solve real world challenges.
+
+We will be covering a broad range of topics, which will all require their own set of dependencies.
+To make sure, as a reader, you can follow allong, we have developed tools to manage the 
+dependencies in a secure environment. 
 
 ## Source Code
 
-The source files from this book can be found on [GitHub](https://github.com/overengineered/) and 
-will be found prefixed with `[Developer Book][Chapter][Section] - Title`
+The source files from this book can be found in the github repo 
+[GitHub](https://github.com/overengineered/docs) and will be found under the folder following the 
+pattern of `booktitle-chapter-section-title`.
 
 ## Stack
 
 Briefly let's cover the stack that we will be working with. Later we'll have a gentle introduction 
-to many of them and others may not require direct interaction with, it may be important to know.
+to many of them and others may not require direct interaction with, but it may be important to 
+know later.
 
-You can follow up on these at anytime to learn more.
+You can follow up to learn more about these at anytime.
 
 ### Frontend
 
-* **Yew** - Yew is a rust crate similar to [react](https://reactjs.org/). Working with Yew feels 
-much like working with react.
+The frontend is what the user sees when they load a web page or views one of apps using 
+Overengineered. Web being the dominate platform today, we choose a lot of our decicions around 
+that. WebAssembly is how we are able to create apps that support a wide range of architecture and
+devices.
+
+* **Yew** - Yew is a Rust Crate similar to [React](https://reactjs.org/). They both use a virtual
+dom, return a JSX like syntax and have both a class and functional implementation with hook like 
+state and lifecycle management.
 * **GraphQL** - [GraphQL](https://graphql.org/) was chosen as the primary server / client 
 interaction to minimize network traffic. With the ever growing number of devices we want to keep 
 payloads as small as possible.  GraphQL provides a very nice abstraction for developers and has 
-existing client libraries for many languages.
+existing client libraries for many languages including Rust.
 
 ### Backend
 
+All of the services that need to run to keep the lights running and the apps working.
+
 #### Webserver
 
-* **Rocket** - [Rocket](https://rocket.rs/) is the primary recommended way to create a web server. 
-Rocket is a rust crate that focuses on a great developer experience with an easy to use API. We 
-think this fits perfectly with what we are trying to accomplish.
+* **Rocket** - [Rocket](https://rocket.rs/) is the primary recommended way to create a user facing
+web server. Rocket is a Rust Crate that focuses on a great developer experience with an easy to 
+use API. We think this fits perfectly with what we are trying to accomplish.
 * **GraphQL** - Like previously mentioned for various reasons we use GraphQL. GraphQL is very easy 
 to integrate with Rocket.
 
 ### DevOps
+
+These cover the infrastructure that the cloud at home services use to manage and deploy the apps 
+used for the cloud apps as well as the development environments. Don't worry most of this will 
+soon be abstracted away and will not require expertise in. We will cover enough information to 
+be able to unblock yourself in the case of an issue or unforseen problem.
 
 * **Docker** - We primarily use [Docker](https://docker.com/) for the build tools, but primarily 
 use [Containard](https://containerd.io/) for the container service.

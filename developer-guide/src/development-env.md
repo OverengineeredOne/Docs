@@ -1,13 +1,16 @@
 # Development Environment
 
 Overengineered is a very opinionated full stack environment. To make the installation of all the 
-dependencies and tools need to work within the environment, we created a Docker image that has 
-all of these prepackaged for convenience.
+dependencies and tools hassle free, we created a Docker image that has all of these prepackaged 
+for convenience.
 
-If you are not familiar with Docker, it is a quick and secure way to build applications 
+If you are not familiar with Docker, it is a quick and secure way to package applications 
 consistently and just work. Docker is similar to a virtual operating system were it only shares 
-the underlying kernel. It provides a declarative interface to compose images and can be published 
-onto repositories.
+the kernel with the underlying system. It provides a declarative interface to compose images and 
+can be published onto repositories. This makes it easy to share, not just code, but all the 
+requirements for the environment as well.
+
+Once the images are created, they can be cold started extremly quickly which is what we want.
 
 ## Launching the environment
 
@@ -18,17 +21,19 @@ session with the container with this command.
 docker run -it oedev /bin/bash
 ```
 
-In this case the i flag is indicating that we want to open an interactive SSH session to the 
-container. The t flag allows to run commands interactively.
+In this case the `i` flag is indicating that we want to open an interactive SSH session to the 
+container. The `t` flag allows to run commands interactively.
 
 After the command is run the Docker container should boot up quickly. As soon as it is booted a 
 ssh session should kick in and connect you to the container.
 
 ## Setting up
 
-Once your successfully SSH'd in, we'll need to set up a few things before we get too deep in. 
+Once your successfully connected, we'll need to set up a few things before we get too deep in. 
 Overengineered uses Github for our code repository and we will be setting up several repositories
 throughout this book.
+
+### Github CLI (gh)
 
 The Github CLI is already shipped with the Docker image. Let's start by logging in. This process 
 is simple, we just need to run one command. But first let's grab a personal access token. 
