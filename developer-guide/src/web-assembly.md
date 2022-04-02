@@ -9,16 +9,16 @@ I'll never do as good as a job as
 [Lin Clark's A Cartoon Intro to WebAssembly](https://www.youtube.com/watch?v=HktWin_LPf4), but
 I'll take a crack at it.
 
-WebAssembly solves the problem to allow applications built to be used in the browser to be written
+WebAssembly solves the problem to allow applications built to be used in the browser, written
 in languages other than Javascript. In our case, we will be using Rust and compiling to the low 
-level assembly. This allows applications to run, without installation and provide native 
-performance.
+level target, WebAssembly. This allows applications to run, without installation and provide 
+native performance.
 
 ## Background
 
-Javascript was created back in 1995 and was the only way to interact with the Dom and manipulate 
+Javascript was created back in 1995 and was the only way to interact with the DOM and manipulate 
 HTML. Overall JS performance is fairly poor, until the introduction of just in time compilers, 
-which drastically increased performance into what it is today.
+which drastically increased performance and interactivity into what it is today.
 
 ## The future of WebAssembly
 

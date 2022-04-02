@@ -1,6 +1,6 @@
 # Overengineered
 
-*by Sean O'Rourke*
+*by Sean O'Rourke, ...*
 
 Welcome to Overengineered's Developer Guide! This text assumes you have an understanding of 
 programming and programming concepts.

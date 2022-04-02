@@ -27,15 +27,16 @@ After Rust is installed, you can use Cargo to install `trunk` by running:
 cargo install trunk
 ```
 
-Then add the WASM build target by running: 
-
-```rust,ignore
-rustup target add wasm32-unknown-unknown
-```
-
 ### Setting up the Yew Project
 
-First create the new project with Cargo:
+For this project, we will need to expose the port 8080 so we can load the page in the browser 
+later. Make sure you add the extra argument when launching the development environment.
+
+```rust,ignore
+docker run -it -p 8080:8080 oedev /bin/bash
+```
+
+Once connected let's go ahead and create our project.
 
 ```rust,ignore
 cargo new example-yew-project
@@ -45,10 +46,14 @@ cd example-yew-project
 And to veryify everything works perform an intital build with Cargo and you should see the 
 expected Hello, World! example.
 
-
 ## Building a web page
 
-Let's start off by making some updates to our Cargo.toml file. We want to add the Yew dependency.
+The first thing we want to make sure we do is add the WASM build target by running: 
+
+```rust,ignore
+rustup target add wasm32-unknown-unknown
+```
+Now we can making some updates to our Cargo.toml file to add the Yew dependency.
 
 
 ```rust,ignore
@@ -62,10 +67,9 @@ yew = "0.19"
 
 ```
 
-
 Now in your main.rs let's create a simple component that renders the message `Hello, World!`
 
-```
+```rust,ignore
 use yew::prelude::*;
 
 #[function_component(App)]
@@ -111,19 +115,55 @@ During development we need to be able to view the changes as we develop. This is
 in to help us. Run the following command to build and serve the application.
 
 ```rust,ignore
-trunk serve --open
+trunk serve 
 ```
+
+From here you can navigate to your browser and try reaching the webpage with the default IP 
+Address. `http://172.17.0.1:8080`
 
 Congradulations, you've built your first Yew app! 
 
 ### Hooks
 
-### HTML Macro
+Hooks are Yew functions that allow you to tie into the lifecycle or state of a component. We will 
+take a look at [use_state](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).
 
-### Components
+`use_state` allows us to create and set a default value to be used within the component. The 
+`UseStateHandle` it returns has a method that allows us to change the state value. This will in 
+turn update the component.
 
-### Agents
+Let's update our app method to test it out.
 
-### Context
+```rust,ignore
+use yet::{Callback, function_component, html, use_state};
 
-### Router
+#[function_component(UseState)]
+fn state() -> Html {
+    let counter = use_state(|| 0);
+    let onClick = {
+        let counter = counter.clone();
+        Callback::from(move |_| counter.set(*counter + 1))
+    };
+    html! {
+	<div>
+	    <button {onclick}>{ "Add one" }</button>
+	    <p>{ "Total: " }{ *counter }</p>
+	</div>
+    }
+}
+
+```
+
+Go ahead and `trunk serve`. You can see as you click the button, it adds one to the total.
+
+### Further Reading
+
+I'll highly reccomend following up with the Yew documentation.
+
+* [Components](https://yew.rs/docs/concepts/components/introduction)
+* [HTML](https://yew.rs/docs/concepts/html/introduction)
+* [Functional Components](https://yew.rs/docs/concepts/function-components/introduction)
+* [Agents](https://yew.rs/docs/concepts/agents/introduction)
+* [Agents](https://yew.rs/docs/concepts/agents)
+* [Contexts](https://yew.rs/docs/concepts/context)
+* [Router](https://yew.rs/docs/concepts/router)

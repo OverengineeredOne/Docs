@@ -1,6 +1,6 @@
 # Development Environment
 
-Overengineered is a very opinionated full stack environment. To make the installation of all the 
+Overengineered has a very opinionated full stack environment. To make the installation of all the 
 dependencies and tools hassle free, we created a Docker image that has all of these prepackaged 
 for convenience.
 
@@ -8,7 +8,7 @@ If you are not familiar with Docker, it is a quick and secure way to package app
 consistently and just work. Docker is similar to a virtual operating system were it only shares 
 the kernel with the underlying system. It provides a declarative interface to compose images and 
 can be published onto repositories. This makes it easy to share, not just code, but all the 
-requirements for the environment as well.
+requirements including the environment.
 
 Once the images are created, they can be cold started extremly quickly which is what we want.
 
