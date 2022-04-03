@@ -144,28 +144,31 @@
                     <main>
                         <h1 id="webassembly"><a class="header" href="#webassembly">WebAssembly</a></h1>
 <p>At the time of writing WebAssembly is sill new and is already gaining steam as the next big player 
-in web development.</p>
+in web development. It has a massive amount of potential to evolve and change the way applications 
+are bulilt and shipped.</p>
 <h2 id="what-is-webassembly"><a class="header" href="#what-is-webassembly">What is WebAssembly?</a></h2>
 <p>I'll never do as good as a job as 
 <a href="https://www.youtube.com/watch?v=HktWin_LPf4">Lin Clark's A Cartoon Intro to WebAssembly</a>, but
-I'll take a crack at it.</p>
+I'll try.</p>
 <p>WebAssembly solves the problem to allow applications built to be used in the browser, written
-in languages other than Javascript. In our case, we will be using Rust and compiling to the low 
-level target, WebAssembly. This allows applications to run, without installation and provide 
-native performance.</p>
+in languages other than Javascript. This is a problem because Javascript is much slower than 
+compiled languages and allows us to do some low level programming to solve problems that were not
+previously possible. Since the code is compiled to the WebAssembly target and converted to a 
+binary format this allows applications to run, without installation and provide native performance.</p>
 <h2 id="background"><a class="header" href="#background">Background</a></h2>
 <p>Javascript was created back in 1995 and was the only way to interact with the DOM and manipulate 
 HTML. Overall JS performance is fairly poor, until the introduction of just in time compilers, 
 which drastically increased performance and interactivity into what it is today.</p>
 <h2 id="the-future-of-webassembly"><a class="header" href="#the-future-of-webassembly">The future of WebAssembly</a></h2>
 <p>Like I mentioned WebAssembly is still new, for example today there is a lot of JS interopt. As 
-data is passed around it's serialzed / deserialized. Today this is a big performance bottleneck. 
-In the future as proposals get written into the WebAssembly standard, such as direct DOM access.</p>
+data is passed around it's serialzed / deserialized and causes some major performance issues that 
+in some cases doesn't make it practical to use. In the future it will have more funcationality 
+such as direct DOM and Websocket access.</p>
 <h2 id="wasi-and-beyond"><a class="header" href="#wasi-and-beyond">WASI and beyond</a></h2>
-<p>WASI is exciting since it brings WebAssembly to the backend. This is exciting for a few reasons,
-every WASI module runs in it's secure environment, interfaces allow for easy interopt between
-languages that compile to the same target, and finally cold start times are nearly instantanous.
-Drastically quicker than Docker, which is already quick.</p>
+<p>WASI or the WebAssembly System Interface is exciting since it brings WebAssembly to the backend. 
+This is exciting for a few reasons, every WASI module runs in it's secure environment, interfaces 
+allow for easy interopt between languages, and finally cold start times are nearly instantanous.
+Drastically quicker than Docker.</p>
 
                     </main>
 

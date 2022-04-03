@@ -170,19 +170,21 @@ throughout this book.</p>
 is simple, we just need to run one command. But first let's grab a personal access token. 
 Instructions can be found at the 
 <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">github docs</a>.</p>
-<p>At the time of writing, You can find it under the developer settings.</p>
+<p>To make this easier we've include the instructions here, but they can be found in the developer 
+settings.</p>
 <ul>
-<li>Upper-right corner of any page, click profile photo and settings.</li>
-<li>In the left bar click Developer settings.</li>
-<li>In the left sidebar click, Personal access tokens.</li>
-<li>Click Generate new token.</li>
-<li>Fill out the details and click generate.</li>
+<li>In the upper-right corner of any page, click on your <code>profile photo</code> and <code>settings</code>.</li>
+<li>In the left navigation bar click on <code>Developer settings</code>.</li>
+<li>Then in the left panel click <code>Personal access tokens</code>.</li>
+<li>Click <code>Generate new token</code>.</li>
+<li>Fill out the details and click <code>generate</code>.</li>
 <li>Make sure you copy the token.</li>
 </ul>
-<p>Now from the SSH session we established with the Docker container we setup earlier run the command
-to login replacing &lt;your_token&gt; with the token we copied in the previous step.</p>
+<p>Now from the SSH session we established with the Docker container run the command to login. 
+Replace &lt;your_token&gt; with the token we copied in the previous step.</p>
 <pre><code class="language-rust ignore">gh auth login --with-token &lt;your_token&gt;
 </code></pre>
+<p><strong>Note:</strong> This step will have to be done each time you launch the dev environment.</p>
 <h2 id="stopping-the-container"><a class="header" href="#stopping-the-container">Stopping the container</a></h2>
 <p>There is no persistent data in this development environment. As soon as the container is no longer
 running all modified files will be gone forever. There are a couple ways to deal with this, you 

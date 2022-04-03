@@ -149,42 +149,47 @@
 programming and programming concepts.</p>
 <p>A good portion of the tech stack is in Rust. Though this text does not require you to have a
 strong Rust background, you should be familiar with the 
-<a href="https://doc.rust-lang.org/book/title-page.html">Rust Book</a>. If you haven't read it, don't fret,
-everything's shiny. If you have experience with Python or JavaScript and React, it's well written 
-and not difficult to get through.</p>
-<p>In this text we'll learn a little bit about the platforms and services we support and use, then 
-take a journey through concepts of Web 3.0 and how we are approaching this effort. Finally we'll
-take a deep dive into the features and tools we've built and curated to accelerate development in
-this new environment.</p>
+<a href="https://doc.rust-lang.org/book/title-page.html">Rust Book</a>. If you haven't read it, everything's
+shiny captian. Not to fret. If you have experience with Python or React, it's well written and not
+difficult to get through.</p>
+<p>In this text we'll take a journey through concepts that make up Overengineered and how we are 
+tackling the big decentralization challenges that is inspiring the next version of the web. Once
+we get a sense for the concepts we'll begin to develop a <strong>TODO</strong> app. Starting with the bare
+features and slowly developing it into a modern decentralized app.</p>
+<p>We will be <em>not</em> be going into great depth into each of the subjects covered in this book. We will
+try to introduce you to concepts in a logical manor where you have an idea on where to look to 
+unblock yourself or find additional resources.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="preface"><a class="header" href="#preface">Preface</a></h1>
 <p>Before we get begin I wanted to give you a little background on Overengineered and some of the 
 original problems I set out to solve. Hopefully this will help set the direction and tone of this
 book.</p>
 <p>First, why Overengineered and what does the name mean? We'll it embodies the spirit of <em>&quot;I'll 
-spend four hours automating this task that only takes me five minutes to complete.&quot;</em> Now what 
-defines our platform and vision is a little more complicated. It mainly derives from a few 
-different things inspired by my career.</p>
+spend four hours automating this task that only takes me five minutes to complete.&quot;</em> I mean, I 
+started this effort to help out a friend with a problem with his small buissness... and now I'm 
+writing a book. Now what defines our platform and vision is a little more complicated. It mainly 
+derives from things inspired throughout my career.</p>
 <p>I've worked within a large tech company for the last ten years solving problems of various scale. 
 My strength has always been solving problems that drastically increase operational and development
-efficiency. Within a company like this we're often highly well tuned engines. Software 
+efficiency. Working in a company like this we're often highly well tuned engines. Software 
 engineering, data science, data engineering, production engineering, user research, language,
-content design, and many others all working efficiency to identify and tackle these problems. We 
-prioritize and eleminate cognitive and physical manual work. This essentially allows entire 
-organizations to maintain minimal budget increases year over year as the number of end users 
-within their products scale to billions of users.</p>
-<p>Applying this same discipline to my personal projects, where I attempt to have direct impact in my 
-day to day has always been a challenge. Whether it be household budgeting, time spent on daily 
-errands, and chores. The scope of solving some of these problems is substantial. It's unfortunate 
-that I have not come across a solution to having all the readily building blocks to hack a project
-within a weekend. I end up burning a significant amount of calories planning, budgeting materials,
-setting up my infrastructure, writing the glue code between services or devices.</p>
-<p>More often than not I end up in a debate with myself if I should use a cloud service or spend the 
-extra effort to build solution.</p>
-<p>The other driving factors that influence Overengineered is the general populations sentiment 
-towards technology companies and tech today. To me, the driving factor of this seems to be trust. 
-People want their data secure, protected, private, and available. The industry seems to be leaning 
-toward blockchain to attempt to solve problem. It is a great tool and has a purpose, but in my 
-opinion is generally to expensive and slow to be used everywhere.</p>
+content design, and many others all working to identify and tackle these operational scale 
+problems. We prioritize and eleminate cognitive and physical manual work. This essentially allows 
+entire organizations to operation with minimal budget increases year over year as the number of 
+end users within their products scale to billions of users.</p>
+<p>This have given me an intersting perspective on the product and services that are avalible to us
+today and all the areas of oppurtunity where we are not even scratching the surface. However 
+applying this same discipline to my personal projects, where I attempt to have direct impact in my
+day to day is a challenge. The scope of solving some of these problems is substantial. It's 
+unfortunate that I have not come across a solution to having all the readily building blocks to 
+solve some of these problems without burning a significant amount of calories planning, budgeting 
+materials, setting up my infrastructure, writing the glue code between services or devices.</p>
+<p>Don't get me wrong, existing solutions exist but all now require a cloud service, which has
+it's advantages, but the current trend is moving toward decentralization.</p>
+<p>This decentralization effort is the other driving factors that influence's the direction of
+Overengineered. To me, the reason behind this seems to be trust. People want their data secure,
+protected, private, and available. The industry seems to be leaning toward blockchain as an
+attempt to solve these problems. It is a great tool and has a purpose, but in my opinion is to
+expensive and slow to be used everywhere.</p>
 <p>So, I asked myself, why not bring the cloud infrastructure home? Make it as easy as Installing an
 operating system. Adding a new computer or device is as easy as scanning a QR code. This is 
 prefect for processing sensitive and private data such as facial recognition on security cameras. 
@@ -220,26 +225,26 @@ platform will not be considered stable or support backwards compatability betwee
 guarantees will likely evolve over time, but for now expect rapid breaking changes.</p>
 <h2 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h2>
 <p>This book has no expectations on the audience's background. It is ideal for any developer who 
-wants to quickly deliver decentralized apps or who are just to see how this landscape is changing 
-with the next generation of the internet. </p>
+wants to quickly deliver decentralized apps or who are just interested to see how this landscape 
+is changing with the next generation of the internet. </p>
 <h2 id="how-to-use-this-book"><a class="header" href="#how-to-use-this-book">How to use this book.</a></h2>
-<p>We try to structure the book so you get introduced to a new topic with a little background before 
-moving into our solution to solving particular challenges. Finally we'll include additional 
-information for followup reading and often a project.</p>
-<p>Thoughout the book we'll be developing and breaking down a simple todo app, where we slowly 
-introduce more and more features as we shape it to solve real world challenges.</p>
+<p>We try to structure the book so you get introduced to a new topic with a little background and 
+further reading before moving into a project that will be continuously developed throughout this
+book.</p>
+<p>The app that we will be developing and breaking down is a simple TODO app. We will be slowly 
+introducing you to more and more features as we shape it to something that is acually useful.</p>
 <p>We will be covering a broad range of topics, which will all require their own set of dependencies.
 To make sure, as a reader, you can follow allong, we have developed tools to manage the 
-dependencies in a secure environment. </p>
+dependencies in a secure environment. These will be covered in later chapters.</p>
 <h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
 <p>The source files from this book can be found in the github repo 
 <a href="https://github.com/overengineered/docs">GitHub</a> and will be found under the folder following the 
-pattern of <code>booktitle-chapter-section-title</code>.</p>
+folder naming pattern of <code>booktitle-chapter-section-title</code>.</p>
 <h2 id="stack"><a class="header" href="#stack">Stack</a></h2>
 <p>Briefly let's cover the stack that we will be working with. Later we'll have a gentle introduction 
 to many of them and others may not require direct interaction with, but it may be important to 
-know later.</p>
-<p>You can follow up to learn more about these at anytime.</p>
+know for debugging purposes.</p>
+<p>You can follow up on any of these topics to learn more.</p>
 <h3 id="frontend"><a class="header" href="#frontend">Frontend</a></h3>
 <p>The frontend is what the user sees when they load a web page or views one of apps using 
 Overengineered. Web being the dominate platform today, we choose a lot of our decicions around 
@@ -247,10 +252,10 @@ that. WebAssembly is how we are able to create apps that support a wide range of
 devices.</p>
 <ul>
 <li><strong>Yew</strong> - Yew is a Rust Crate similar to <a href="https://reactjs.org/">React</a>. They both use a virtual
-dom, return a JSX like syntax and have both a class and functional implementation with hook like 
-state and lifecycle management.</li>
+dom, components return a JSX like syntax and have both a class and functional implementation with 
+hooks into state and lifecycle management.</li>
 <li><strong>GraphQL</strong> - <a href="https://graphql.org/">GraphQL</a> was chosen as the primary server / client 
-interaction to minimize network traffic. With the ever growing number of devices we want to keep 
+communication to minimize network traffic. With the ever growing number of devices we want to keep 
 payloads as small as possible.  GraphQL provides a very nice abstraction for developers and has 
 existing client libraries for many languages including Rust.</li>
 </ul>
@@ -260,18 +265,19 @@ existing client libraries for many languages including Rust.</li>
 <ul>
 <li><strong>Rocket</strong> - <a href="https://rocket.rs/">Rocket</a> is the primary recommended way to create a user facing
 web server. Rocket is a Rust Crate that focuses on a great developer experience with an easy to 
-use API. We think this fits perfectly with what we are trying to accomplish.</li>
+use API. We think this fits perfectly with what we are trying to accomplish. And many 
+Overengineered Rust Crates take inspiration from this.</li>
 <li><strong>GraphQL</strong> - Like previously mentioned for various reasons we use GraphQL. GraphQL is very easy 
 to integrate with Rocket.</li>
 </ul>
 <h3 id="devops"><a class="header" href="#devops">DevOps</a></h3>
 <p>These cover the infrastructure that the cloud at home services use to manage and deploy the apps 
 used for the cloud apps as well as the development environments. Don't worry most of this will 
-soon be abstracted away and will not require expertise in. We will cover enough information to 
-be able to unblock yourself in the case of an issue or unforseen problem.</p>
+soon be abstracted away and will not require expertise in to use Overengineered. We will cover
+enough information to be able to unblock yourself in the case of an issue or unforseen problem.</p>
 <ul>
-<li><strong>Docker</strong> - We primarily use <a href="https://docker.com/">Docker</a> for the build tools, but primarily 
-use <a href="https://containerd.io/">Containard</a> for the container service.</li>
+<li><strong>Docker</strong> - We primarily use <a href="https://docker.com/">Docker</a> for the build tools, but  use
+<a href="https://containerd.io/">Containard</a> for the container service.</li>
 <li><strong>Kubernetes</strong> - <a href="https://kubernetes.io/">Kubernetes</a> is a container orchestration service to 
 manage containers across all devices within your network. We specifically use 
 <a href="https://k3s.io/">k3s</a> since it supports the arm architecture and can easily be ran on Raspberry 
@@ -296,26 +302,27 @@ DNS.</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
 <p>Let's get started! We'll start by installing all the prerequisites then dive into the fundamental 
 pieces of Overengineered.</p>
-<p>To ensure rapid development we want to minimize the setup times for your development environment 
-and tools. We accomplish this by utilizing docker and in the future will provide a web based 
+<p>We want to ensure rapid development and minimize setup times for your development environment 
+and tools. We accomplish this by utilizing Docker and in the future will provide a web based 
 environment. We will go into more detail in the following chapters, but for now know, Our image 
 has Ubuntu as the base image. Also comes with all the tools preinstalled to follow along with the
-book.</p>
+Overengineered books.</p>
 <h2 id="installing-docker"><a class="header" href="#installing-docker">Installing Docker</a></h2>
-<h3 id="ubuntu-and-debian-based-os-including-raspberry-pi"><a class="header" href="#ubuntu-and-debian-based-os-including-raspberry-pi">Ubuntu and Debian based OS including Raspberry Pi</a></h3>
+<h3 id="ubuntu-and-debian-based-operating-systems-including-raspberry-pi"><a class="header" href="#ubuntu-and-debian-based-operating-systems-including-raspberry-pi">Ubuntu and Debian based Operating Systems including Raspberry Pi</a></h3>
 <p>You can find install instructions for ubuntu at 
 <a href="https://docs.docker.com/engine/install/ubuntu/">docs.docker.com</a>. To make tihs process even 
-easier We've created a convenience script to get you set up with docker quickly. Go ahead and copy 
+easier We've created a convenience script to get you set up with Docker quickly. Go ahead and copy 
 paste this into your terminal.</p>
 <pre><code class="language-rust ignore">wget -O - https://raw.githubusercontent.com/OverengineeredOne/easy-docker-setup/main/debian.sh | bash
 </code></pre>
 <p>If you find any issues with the script, please, fill out an issue on 
 <a href="https://github.com/OverengineeredOne/easy-docker-setup">github</a></p>
 <h4 id="set-up-overengineered"><a class="header" href="#set-up-overengineered">Set up Overengineered</a></h4>
-<p>Everything's shiny captain, a development environment doesn't exist yet. If you read a head you 
-can build the current state from the source.</p>
+<p>Everything's shiny captain, a development environment doesn't exist yet. If you read ahead you can
+build from the source.</p>
 <h3 id="mac-os-x"><a class="header" href="#mac-os-x">Mac Os X</a></h3>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<p><strong>Note</strong>: Will likly provide instructions for a VM using hypervisor.</p>
 <h2 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h2>
 <p>Since the entire development environment is a container image, we can download the source from 
 github and build it our selves.</p>
@@ -356,19 +363,21 @@ throughout this book.</p>
 is simple, we just need to run one command. But first let's grab a personal access token. 
 Instructions can be found at the 
 <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">github docs</a>.</p>
-<p>At the time of writing, You can find it under the developer settings.</p>
+<p>To make this easier we've include the instructions here, but they can be found in the developer 
+settings.</p>
 <ul>
-<li>Upper-right corner of any page, click profile photo and settings.</li>
-<li>In the left bar click Developer settings.</li>
-<li>In the left sidebar click, Personal access tokens.</li>
-<li>Click Generate new token.</li>
-<li>Fill out the details and click generate.</li>
+<li>In the upper-right corner of any page, click on your <code>profile photo</code> and <code>settings</code>.</li>
+<li>In the left navigation bar click on <code>Developer settings</code>.</li>
+<li>Then in the left panel click <code>Personal access tokens</code>.</li>
+<li>Click <code>Generate new token</code>.</li>
+<li>Fill out the details and click <code>generate</code>.</li>
 <li>Make sure you copy the token.</li>
 </ul>
-<p>Now from the SSH session we established with the Docker container we setup earlier run the command
-to login replacing &lt;your_token&gt; with the token we copied in the previous step.</p>
+<p>Now from the SSH session we established with the Docker container run the command to login. 
+Replace &lt;your_token&gt; with the token we copied in the previous step.</p>
 <pre><code class="language-rust ignore">gh auth login --with-token &lt;your_token&gt;
 </code></pre>
+<p><strong>Note:</strong> This step will have to be done each time you launch the dev environment.</p>
 <h2 id="stopping-the-container"><a class="header" href="#stopping-the-container">Stopping the container</a></h2>
 <p>There is no persistent data in this development environment. As soon as the container is no longer
 running all modified files will be gone forever. There are a couple ways to deal with this, you 
@@ -385,45 +394,52 @@ accessed with <code>oecli</code>.</p>
 section.</p>
 <pre><code class="language-rust ignore">oecli --help
 </code></pre>
+<p>We will dive into more details into the indiviual commands in the upcoming chapters as they are 
+introduced.</p>
 <h3 id="manual-installation"><a class="header" href="#manual-installation">Manual Installation</a></h3>
 <p>If you are not within the Overengineered dev environment you can install <code>oecli</code> through Cargo.</p>
 <pre><code class="language-rust ignore">cargo install oecli
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="webassembly"><a class="header" href="#webassembly">WebAssembly</a></h1>
 <p>At the time of writing WebAssembly is sill new and is already gaining steam as the next big player 
-in web development.</p>
+in web development. It has a massive amount of potential to evolve and change the way applications 
+are bulilt and shipped.</p>
 <h2 id="what-is-webassembly"><a class="header" href="#what-is-webassembly">What is WebAssembly?</a></h2>
 <p>I'll never do as good as a job as 
 <a href="https://www.youtube.com/watch?v=HktWin_LPf4">Lin Clark's A Cartoon Intro to WebAssembly</a>, but
-I'll take a crack at it.</p>
+I'll try.</p>
 <p>WebAssembly solves the problem to allow applications built to be used in the browser, written
-in languages other than Javascript. In our case, we will be using Rust and compiling to the low 
-level target, WebAssembly. This allows applications to run, without installation and provide 
-native performance.</p>
+in languages other than Javascript. This is a problem because Javascript is much slower than 
+compiled languages and allows us to do some low level programming to solve problems that were not
+previously possible. Since the code is compiled to the WebAssembly target and converted to a 
+binary format this allows applications to run, without installation and provide native performance.</p>
 <h2 id="background"><a class="header" href="#background">Background</a></h2>
 <p>Javascript was created back in 1995 and was the only way to interact with the DOM and manipulate 
 HTML. Overall JS performance is fairly poor, until the introduction of just in time compilers, 
 which drastically increased performance and interactivity into what it is today.</p>
 <h2 id="the-future-of-webassembly"><a class="header" href="#the-future-of-webassembly">The future of WebAssembly</a></h2>
 <p>Like I mentioned WebAssembly is still new, for example today there is a lot of JS interopt. As 
-data is passed around it's serialzed / deserialized. Today this is a big performance bottleneck. 
-In the future as proposals get written into the WebAssembly standard, such as direct DOM access.</p>
+data is passed around it's serialzed / deserialized and causes some major performance issues that 
+in some cases doesn't make it practical to use. In the future it will have more funcationality 
+such as direct DOM and Websocket access.</p>
 <h2 id="wasi-and-beyond"><a class="header" href="#wasi-and-beyond">WASI and beyond</a></h2>
-<p>WASI is exciting since it brings WebAssembly to the backend. This is exciting for a few reasons,
-every WASI module runs in it's secure environment, interfaces allow for easy interopt between
-languages that compile to the same target, and finally cold start times are nearly instantanous.
-Drastically quicker than Docker, which is already quick.</p>
+<p>WASI or the WebAssembly System Interface is exciting since it brings WebAssembly to the backend. 
+This is exciting for a few reasons, every WASI module runs in it's secure environment, interfaces 
+allow for easy interopt between languages, and finally cold start times are nearly instantanous.
+Drastically quicker than Docker.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="yew"><a class="header" href="#yew">Yew</a></h1>
 <p>Yew is a modern Rust framework for creating multi-threaded front-end web applications with 
 WebAssembly.</p>
-<p>Like React Yew is a component based framework which makes it easy to create interactive UIs. 
-Performance is acheived by minimizing DOM calls and offloading proccing into background threads.</p>
+<p>Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
+Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
+threads.</p>
 <h2 id="intoduction"><a class="header" href="#intoduction">Intoduction</a></h2>
 <p>Let's take a look at how to build an example Yew app. If you are using the Overengineered 
-development environment we are good to go and can skip the next step. If not there are a couple of
-prerequisites you'll need to set up.</p>
+development environment we are good to go and can skip the next step. If not, there are a couple 
+of prerequisites you'll need to set up.</p>
 <h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites.</a></h3>
-<p>You'll need to make sure you have the following tools up to date.</p>
+<p>This step is only required if you are not using the development environment. You'll need to make 
+sure you have the following tools up to date.</p>
 <ul>
 <li>Rust</li>
 <li>trunk</li>
@@ -433,22 +449,26 @@ prerequisites you'll need to set up.</p>
 <p>After Rust is installed, you can use Cargo to install <code>trunk</code> by running:</p>
 <pre><code class="language-rust ignore">cargo install trunk
 </code></pre>
+<p>The compile target is covered later.</p>
 <h3 id="setting-up-the-yew-project"><a class="header" href="#setting-up-the-yew-project">Setting up the Yew Project</a></h3>
 <p>For this project, we will need to expose the port 8080 so we can load the page in the browser 
-later. Make sure you add the extra argument when launching the development environment.</p>
+later.</p>
 <pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
 </code></pre>
-<p>Once connected let's go ahead and create our project.</p>
+<p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the development environment.
+This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+map that to port 8080 on the host computer.</p>
+<p>Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.</p>
 <pre><code class="language-rust ignore">cargo new example-yew-project
 cd example-yew-project
 </code></pre>
-<p>And to veryify everything works perform an intital build with Cargo and you should see the 
-expected Hello, World! example.</p>
+<p>And to veryify everything works perform an intital run with Cargo (<code>cargo run</code>) and you should see
+the expected Hello, World! example.</p>
 <h2 id="building-a-web-page"><a class="header" href="#building-a-web-page">Building a web page</a></h2>
-<p>The first thing we want to make sure we do is add the WASM build target by running: </p>
+<p>The first thing we want to make sure we do is add the WASM (WebAssembly) build target by running: </p>
 <pre><code class="language-rust ignore">rustup target add wasm32-unknown-unknown
 </code></pre>
-<p>Now we can making some updates to our Cargo.toml file to add the Yew dependency.</p>
+<p>Now we can making some updates to our Cargo.toml file to add the new Yew dependency.</p>
 <pre><code class="language-rust ignore">[package]
 name = &quot;example-yew-project&quot;
 version = &quot;0.1.0&quot;
@@ -458,13 +478,14 @@ edition = &quot;2021&quot;
 yew = &quot;0.19&quot;
 
 </code></pre>
-<p>Now in your main.rs let's create a simple component that renders the message <code>Hello, World!</code></p>
+<p>Open up <code>src/main.rs</code> and create a simple component that renders the message <code>Hello, World!</code>. I'll 
+go ahead and show you what it looks like then, we'll break it down.</p>
 <pre><code class="language-rust ignore">use yew::prelude::*;
 
 #[function_component(App)]
 fn app() -&gt; Html {
     html! {
-	&lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
+	  &lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
     }
 }
 
@@ -472,17 +493,17 @@ fn main() {
     yew::start_app::&lt;App&gt;();
 }
 </code></pre>
-<p>The <code>function_component()</code> macro creates a functional component with the name being the identifier 
-name passed in as an argument. Function components are a simplivied version of a normal component.
-They render what every they return. In our case we return the JSX like markup within the html 
-macro.</p>
+<p>The <code>function_component()</code> macro creates a component, in this case with the name <code>App</code>. Function
+components are a simplified components. They return a JSX like syntax and this is exactly what is 
+rendered.</p>
 <p>A couple things to note about the html macro.</p>
 <ul>
-<li>Expressions must be wrapped in curly braces <code>{ }</code></li>
+<li>Expressions can be used but must be wrapped in curly braces <code>{ }</code></li>
 <li>There must only be one root node. You can wrap them in a fragment <code>&lt;&gt;&lt;/&gt;</code></li>
 </ul>
 <p>Before we can see what this looks like in the browser let's make sure we add <code>index.html</code> to 
-the root of the project.</p>
+the root of the project. This is still a webpage and just like in React, we still have to define 
+a index.html to serve to the client.</p>
 <pre><code class="language-rust ignore">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
     &lt;head&gt;&lt;/head&gt;
@@ -492,7 +513,8 @@ the root of the project.</p>
 &lt;/html&gt;
 </code></pre>
 <p>If you notice we don't add anything to the children of the body element. This is because Yew will 
-insert this data for us.</p>
+insert this data for us. Looking at the provided example above, when <code>yew::start::&lt;App&gt;();</code> is ran 
+it will replace the children of body with the return value of <code>app()</code>.</p>
 <h3 id="viewing-the-page"><a class="header" href="#viewing-the-page">Viewing the page</a></h3>
 <p>During development we need to be able to view the changes as we develop. This is where trunk comes 
 in to help us. Run the following command to build and serve the application.</p>
@@ -501,6 +523,12 @@ in to help us. Run the following command to build and serve the application.</p>
 <p>From here you can navigate to your browser and try reaching the webpage with the default IP 
 Address. <code>http://172.17.0.1:8080</code></p>
 <p>Congradulations, you've built your first Yew app! </p>
+<h3 id="watching-changes"><a class="header" href="#watching-changes">Watching changes</a></h3>
+<p>A big part of this development flow is being able to instantly see your changes as your are 
+developing. Today this is sadly not possible. The next steps before we can get there are to
+install an ssh server on the docker image. Development instructions will be updated to reflect 
+changes to use a traditional ssh client to connect to the dev environment. Instructions for tools
+like VSCode will be added.</p>
 <h3 id="hooks"><a class="header" href="#hooks">Hooks</a></h3>
 <p>Hooks are Yew functions that allow you to tie into the lifecycle or state of a component. We will 
 take a look at <a href="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">use_state</a>.</p>
@@ -526,9 +554,18 @@ fn state() -&gt; Html {
 }
 
 </code></pre>
-<p>Go ahead and <code>trunk serve</code>. You can see as you click the button, it adds one to the total.</p>
+<p>You can see here we call <code>use_state()</code> and set it to counter. We're also passing a callback 
+function inside. This tells Yew to default the value. In this case <code>0</code>.</p>
+<p>We use <code>counter</code> two ways. One directly in the return value. We <code>derefrence</code> <code>counter</code> and 
+display that as the &quot;total&quot; value.</p>
+<p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the reference and move it's 
+ownship into the <code>Callback</code> struct. You can see <code>onClick</code> bing passed into the <code>&lt;button /&gt;</code> 
+<code>props</code>. Yew will map the onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the 
+&quot;Add One Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
+<p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>
 <h3 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h3>
-<p>I'll highly reccomend following up with the Yew documentation.</p>
+<p>We are only covering a very small introduction to Yew, just to get your feet wet. I'll highly 
+recommend following up with the Yew documentation.</p>
 <ul>
 <li><a href="https://yew.rs/docs/concepts/components/introduction">Components</a></li>
 <li><a href="https://yew.rs/docs/concepts/html/introduction">HTML</a></li>
@@ -539,16 +576,17 @@ fn state() -&gt; Html {
 <li><a href="https://yew.rs/docs/concepts/router">Router</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="component-library"><a class="header" href="#component-library">Component Library</a></h1>
-<p>Now that we know how to create components, creating high quality complex user interfaces from 
-scratch is a big challenge. This is where a Component Library can help.</p>
-<p>At this time there is not a feature complete component library for Yew. Of the handful of existing
-projects <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one recently 
-maintained.</p>
+<p>Now that we know how to create components we would like to build something a little nicer. But 
+creating high quality complex user interfaces from scratch is a big challenge. This is where a 
+Component Library can help.</p>
+<p>At this time there is not a feature complete component library for Yew. And of the handful of
+existing projects <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one 
+recently maintained.</p>
 <h2 id="patternfly"><a class="header" href="#patternfly">Patternfly</a></h2>
 <p>Patternfly is an open source design system to create consistent and usable applications
 experiences. Pattternfly provides clear standards and guidelines to build efficently. It was 
 designed as a React component library, however there is a community effort recreate the components
-on an as needed basis.</p>
+on an as needed basis for Yew.</p>
 <p>Given the current state it would be best to start to get to know the library though the React 
 documentation.</p>
 <h2 id="components"><a class="header" href="#components">Components</a></h2>
@@ -561,11 +599,13 @@ the component.</p>
 <h3 id="guidelines"><a class="header" href="#guidelines">Guidelines</a></h3>
 <p>The <a href="https://www.patternfly.org/v4/components/alert/design-guidelines">Design Guidelines</a> exists 
 for every component and provides details what the expected behaviors and how the user interacts 
-with it.</p>
+with it. Many will also contain best practicies and how they should be used with the other 
+Patternfly components.</p>
 <h3 id="patternfly-rs"><a class="header" href="#patternfly-rs">patternfly-rs</a></h3>
-<p>Let's look at the equivalent <a href="https://ctron.github.io/components/alert">Alert</a> component 
-example. patternfly-rs uses the same styles sheets as the React library so the components should 
-look identical. Like the upstream Patternfly documentation, it should contain the code snippit.</p>
+<p>Let's look at the equivalent <a href="https://ctron.github.io/patternfly-yew-quickstart/">Rust Doc</a> and 
+find the <code>Alert</code> component. patternfly-rs uses the same styles sheets as the React library so the
+components should look identical. Like the upstream Patternfly documentation, it should contain 
+the code snippit, but currently nothing else.</p>
 <p>At the current stage there is not a lot of componenets and the example page does not meet parity
 but should be a good place to start.</p>
 <p>There are also more components completed than the ones on the example. A better resource for an up
@@ -582,6 +622,10 @@ name. This clones the repo using the name as the name of the repo.</p>
 <pre><code class="language-rust ignore">oecli pwa --new &lt;name&gt;
 </code></pre>
 <p>Just like our previous examples, run <code>trunk serve</code> and head to your browser to check it out. </p>
+<p><strong>Note</strong>: <code>pwa</code> here stands for Progressive Web App. Progressive web apps are apps that load a 
+skeleton and hydrate components as they are ready. At this current state, Overengineered does not 
+offer server side rendering, or this progressive hydration. These are goals further down the 
+roadmap.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="todo-app"><a class="header" href="#todo-app">Todo App</a></h1>
 
                     </main>

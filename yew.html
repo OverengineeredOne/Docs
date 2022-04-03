@@ -145,14 +145,16 @@
                         <h1 id="yew"><a class="header" href="#yew">Yew</a></h1>
 <p>Yew is a modern Rust framework for creating multi-threaded front-end web applications with 
 WebAssembly.</p>
-<p>Like React Yew is a component based framework which makes it easy to create interactive UIs. 
-Performance is acheived by minimizing DOM calls and offloading proccing into background threads.</p>
+<p>Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
+Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
+threads.</p>
 <h2 id="intoduction"><a class="header" href="#intoduction">Intoduction</a></h2>
 <p>Let's take a look at how to build an example Yew app. If you are using the Overengineered 
-development environment we are good to go and can skip the next step. If not there are a couple of
-prerequisites you'll need to set up.</p>
+development environment we are good to go and can skip the next step. If not, there are a couple 
+of prerequisites you'll need to set up.</p>
 <h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites.</a></h3>
-<p>You'll need to make sure you have the following tools up to date.</p>
+<p>This step is only required if you are not using the development environment. You'll need to make 
+sure you have the following tools up to date.</p>
 <ul>
 <li>Rust</li>
 <li>trunk</li>
@@ -162,22 +164,26 @@ prerequisites you'll need to set up.</p>
 <p>After Rust is installed, you can use Cargo to install <code>trunk</code> by running:</p>
 <pre><code class="language-rust ignore">cargo install trunk
 </code></pre>
+<p>The compile target is covered later.</p>
 <h3 id="setting-up-the-yew-project"><a class="header" href="#setting-up-the-yew-project">Setting up the Yew Project</a></h3>
 <p>For this project, we will need to expose the port 8080 so we can load the page in the browser 
-later. Make sure you add the extra argument when launching the development environment.</p>
+later.</p>
 <pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
 </code></pre>
-<p>Once connected let's go ahead and create our project.</p>
+<p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the development environment.
+This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+map that to port 8080 on the host computer.</p>
+<p>Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.</p>
 <pre><code class="language-rust ignore">cargo new example-yew-project
 cd example-yew-project
 </code></pre>
-<p>And to veryify everything works perform an intital build with Cargo and you should see the 
-expected Hello, World! example.</p>
+<p>And to veryify everything works perform an intital run with Cargo (<code>cargo run</code>) and you should see
+the expected Hello, World! example.</p>
 <h2 id="building-a-web-page"><a class="header" href="#building-a-web-page">Building a web page</a></h2>
-<p>The first thing we want to make sure we do is add the WASM build target by running: </p>
+<p>The first thing we want to make sure we do is add the WASM (WebAssembly) build target by running: </p>
 <pre><code class="language-rust ignore">rustup target add wasm32-unknown-unknown
 </code></pre>
-<p>Now we can making some updates to our Cargo.toml file to add the Yew dependency.</p>
+<p>Now we can making some updates to our Cargo.toml file to add the new Yew dependency.</p>
 <pre><code class="language-rust ignore">[package]
 name = &quot;example-yew-project&quot;
 version = &quot;0.1.0&quot;
@@ -187,13 +193,14 @@ edition = &quot;2021&quot;
 yew = &quot;0.19&quot;
 
 </code></pre>
-<p>Now in your main.rs let's create a simple component that renders the message <code>Hello, World!</code></p>
+<p>Open up <code>src/main.rs</code> and create a simple component that renders the message <code>Hello, World!</code>. I'll 
+go ahead and show you what it looks like then, we'll break it down.</p>
 <pre><code class="language-rust ignore">use yew::prelude::*;
 
 #[function_component(App)]
 fn app() -&gt; Html {
     html! {
-	&lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
+	  &lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
     }
 }
 
@@ -201,17 +208,17 @@ fn main() {
     yew::start_app::&lt;App&gt;();
 }
 </code></pre>
-<p>The <code>function_component()</code> macro creates a functional component with the name being the identifier 
-name passed in as an argument. Function components are a simplivied version of a normal component.
-They render what every they return. In our case we return the JSX like markup within the html 
-macro.</p>
+<p>The <code>function_component()</code> macro creates a component, in this case with the name <code>App</code>. Function
+components are a simplified components. They return a JSX like syntax and this is exactly what is 
+rendered.</p>
 <p>A couple things to note about the html macro.</p>
 <ul>
-<li>Expressions must be wrapped in curly braces <code>{ }</code></li>
+<li>Expressions can be used but must be wrapped in curly braces <code>{ }</code></li>
 <li>There must only be one root node. You can wrap them in a fragment <code>&lt;&gt;&lt;/&gt;</code></li>
 </ul>
 <p>Before we can see what this looks like in the browser let's make sure we add <code>index.html</code> to 
-the root of the project.</p>
+the root of the project. This is still a webpage and just like in React, we still have to define 
+a index.html to serve to the client.</p>
 <pre><code class="language-rust ignore">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
     &lt;head&gt;&lt;/head&gt;
@@ -221,7 +228,8 @@ the root of the project.</p>
 &lt;/html&gt;
 </code></pre>
 <p>If you notice we don't add anything to the children of the body element. This is because Yew will 
-insert this data for us.</p>
+insert this data for us. Looking at the provided example above, when <code>yew::start::&lt;App&gt;();</code> is ran 
+it will replace the children of body with the return value of <code>app()</code>.</p>
 <h3 id="viewing-the-page"><a class="header" href="#viewing-the-page">Viewing the page</a></h3>
 <p>During development we need to be able to view the changes as we develop. This is where trunk comes 
 in to help us. Run the following command to build and serve the application.</p>
@@ -230,6 +238,12 @@ in to help us. Run the following command to build and serve the application.</p>
 <p>From here you can navigate to your browser and try reaching the webpage with the default IP 
 Address. <code>http://172.17.0.1:8080</code></p>
 <p>Congradulations, you've built your first Yew app! </p>
+<h3 id="watching-changes"><a class="header" href="#watching-changes">Watching changes</a></h3>
+<p>A big part of this development flow is being able to instantly see your changes as your are 
+developing. Today this is sadly not possible. The next steps before we can get there are to
+install an ssh server on the docker image. Development instructions will be updated to reflect 
+changes to use a traditional ssh client to connect to the dev environment. Instructions for tools
+like VSCode will be added.</p>
 <h3 id="hooks"><a class="header" href="#hooks">Hooks</a></h3>
 <p>Hooks are Yew functions that allow you to tie into the lifecycle or state of a component. We will 
 take a look at <a href="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">use_state</a>.</p>
@@ -255,9 +269,18 @@ fn state() -&gt; Html {
 }
 
 </code></pre>
-<p>Go ahead and <code>trunk serve</code>. You can see as you click the button, it adds one to the total.</p>
+<p>You can see here we call <code>use_state()</code> and set it to counter. We're also passing a callback 
+function inside. This tells Yew to default the value. In this case <code>0</code>.</p>
+<p>We use <code>counter</code> two ways. One directly in the return value. We <code>derefrence</code> <code>counter</code> and 
+display that as the &quot;total&quot; value.</p>
+<p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the reference and move it's 
+ownship into the <code>Callback</code> struct. You can see <code>onClick</code> bing passed into the <code>&lt;button /&gt;</code> 
+<code>props</code>. Yew will map the onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the 
+&quot;Add One Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
+<p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>
 <h3 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h3>
-<p>I'll highly reccomend following up with the Yew documentation.</p>
+<p>We are only covering a very small introduction to Yew, just to get your feet wet. I'll highly 
+recommend following up with the Yew documentation.</p>
 <ul>
 <li><a href="https://yew.rs/docs/concepts/components/introduction">Components</a></li>
 <li><a href="https://yew.rs/docs/concepts/html/introduction">HTML</a></li>
