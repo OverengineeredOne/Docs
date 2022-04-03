@@ -40,21 +40,24 @@ is simple, we just need to run one command. But first let's grab a personal acce
 Instructions can be found at the 
 [github docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-At the time of writing, You can find it under the developer settings.
+To make this easier we've include the instructions here, but they can be found in the developer 
+settings.
 
-* Upper-right corner of any page, click profile photo and settings.
-* In the left bar click Developer settings.
-* In the left sidebar click, Personal access tokens.
-* Click Generate new token.
-* Fill out the details and click generate.
+* In the upper-right corner of any page, click on your `profile photo` and `settings`.
+* In the left navigation bar click on `Developer settings`.
+* Then in the left panel click `Personal access tokens`.
+* Click `Generate new token`.
+* Fill out the details and click `generate`.
 * Make sure you copy the token.
 
-Now from the SSH session we established with the Docker container we setup earlier run the command
-to login replacing <your_token> with the token we copied in the previous step.
+Now from the SSH session we established with the Docker container run the command to login. 
+Replace <your_token> with the token we copied in the previous step.
 
 ```rust,ignore
 gh auth login --with-token <your_token>
 ```
+
+**Note:** This step will have to be done each time you launch the dev environment.
 
 ## Stopping the container
 

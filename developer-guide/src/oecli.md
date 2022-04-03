@@ -17,6 +17,9 @@ section.
 oecli --help
 ```
 
+We will dive into more details into the indiviual commands in the upcoming chapters as they are 
+introduced.
+
 ### Manual Installation
 
 If you are not within the Overengineered dev environment you can install `oecli` through Cargo.

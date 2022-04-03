@@ -1,19 +1,22 @@
 # Yew
+
 Yew is a modern Rust framework for creating multi-threaded front-end web applications with 
 WebAssembly.
 
-Like React Yew is a component based framework which makes it easy to create interactive UIs. 
-Performance is acheived by minimizing DOM calls and offloading proccing into background threads.
+Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
+Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
+threads.
 
 ## Intoduction 
 
 Let's take a look at how to build an example Yew app. If you are using the Overengineered 
-development environment we are good to go and can skip the next step. If not there are a couple of
-prerequisites you'll need to set up.
+development environment we are good to go and can skip the next step. If not, there are a couple 
+of prerequisites you'll need to set up.
 
-### Prerequisites.
+### Prerequisites. 
 
-You'll need to make sure you have the following tools up to date.
+This step is only required if you are not using the development environment. You'll need to make 
+sure you have the following tools up to date.
 
 * Rust
 * trunk
@@ -27,33 +30,39 @@ After Rust is installed, you can use Cargo to install `trunk` by running:
 cargo install trunk
 ```
 
+The compile target is covered later.
+
 ### Setting up the Yew Project
 
 For this project, we will need to expose the port 8080 so we can load the page in the browser 
-later. Make sure you add the extra argument when launching the development environment.
+later.
 
 ```rust,ignore
 docker run -it -p 8080:8080 oedev /bin/bash
 ```
 
-Once connected let's go ahead and create our project.
+Here we are adding `-p 8080:8080` to the earlier command to launch the development environment.
+This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+map that to port 8080 on the host computer.
+
+Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.
 
 ```rust,ignore
 cargo new example-yew-project
 cd example-yew-project
 ```
 
-And to veryify everything works perform an intital build with Cargo and you should see the 
-expected Hello, World! example.
+And to veryify everything works perform an intital run with Cargo (`cargo run`) and you should see
+the expected Hello, World! example.
 
 ## Building a web page
 
-The first thing we want to make sure we do is add the WASM build target by running: 
+The first thing we want to make sure we do is add the WASM (WebAssembly) build target by running: 
 
 ```rust,ignore
 rustup target add wasm32-unknown-unknown
 ```
-Now we can making some updates to our Cargo.toml file to add the Yew dependency.
+Now we can making some updates to our Cargo.toml file to add the new Yew dependency.
 
 
 ```rust,ignore
@@ -67,7 +76,8 @@ yew = "0.19"
 
 ```
 
-Now in your main.rs let's create a simple component that renders the message `Hello, World!`
+Open up `src/main.rs` and create a simple component that renders the message `Hello, World!`. I'll 
+go ahead and show you what it looks like then, we'll break it down.
 
 ```rust,ignore
 use yew::prelude::*;
@@ -75,7 +85,7 @@ use yew::prelude::*;
 #[function_component(App)]
 fn app() -> Html {
     html! {
-	<h1>{ "Hello, World!" }</h1>
+	  <h1>{ "Hello, World!" }</h1>
     }
 }
 
@@ -84,17 +94,17 @@ fn main() {
 }
 ```
 
-The `function_component()` macro creates a functional component with the name being the identifier 
-name passed in as an argument. Function components are a simplivied version of a normal component.
-They render what every they return. In our case we return the JSX like markup within the html 
-macro.
+The `function_component()` macro creates a component, in this case with the name `App`. Function
+components are a simplified components. They return a JSX like syntax and this is exactly what is 
+rendered.
 
 A couple things to note about the html macro.
-* Expressions must be wrapped in curly braces `{ }`
+* Expressions can be used but must be wrapped in curly braces `{ }`
 * There must only be one root node. You can wrap them in a fragment `<></>`
 
 Before we can see what this looks like in the browser let's make sure we add `index.html` to 
-the root of the project.
+the root of the project. This is still a webpage and just like in React, we still have to define 
+a index.html to serve to the client.
 
 ```rust,ignore
 <!DOCTYPE html>
@@ -107,7 +117,8 @@ the root of the project.
 ```
 
 If you notice we don't add anything to the children of the body element. This is because Yew will 
-insert this data for us.
+insert this data for us. Looking at the provided example above, when `yew::start::<App>();` is ran 
+it will replace the children of body with the return value of `app()`.
 
 ### Viewing the page
 
@@ -122,6 +133,14 @@ From here you can navigate to your browser and try reaching the webpage with the
 Address. `http://172.17.0.1:8080`
 
 Congradulations, you've built your first Yew app! 
+
+### Watching changes
+
+A big part of this development flow is being able to instantly see your changes as your are 
+developing. Today this is sadly not possible. The next steps before we can get there are to
+install an ssh server on the docker image. Development instructions will be updated to reflect 
+changes to use a traditional ssh client to connect to the dev environment. Instructions for tools
+like VSCode will be added.
 
 ### Hooks
 
@@ -154,11 +173,23 @@ fn state() -> Html {
 
 ```
 
-Go ahead and `trunk serve`. You can see as you click the button, it adds one to the total.
+You can see here we call `use_state()` and set it to counter. We're also passing a callback 
+function inside. This tells Yew to default the value. In this case `0`.
+
+We use `counter` two ways. One directly in the return value. We `derefrence` `counter` and 
+display that as the "total" value.
+
+The other is in the `onClick` `handle`. Inside this callback we clone the reference and move it's 
+ownship into the `Callback` struct. You can see `onClick` bing passed into the `<button />` 
+`props`. Yew will map the onclick `HTMLEvent` to this `onClick` function you defined. When the 
+"Add One Button" is clicked you will see the `counter`'s value get set to `counter + 1`.
+
+Go ahead and `trunk serve`. You can see as you click the button and test it out.
 
 ### Further Reading
 
-I'll highly reccomend following up with the Yew documentation.
+We are only covering a very small introduction to Yew, just to get your feet wet. I'll highly 
+recommend following up with the Yew documentation.
 
 * [Components](https://yew.rs/docs/concepts/components/introduction)
 * [HTML](https://yew.rs/docs/concepts/html/introduction)

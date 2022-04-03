@@ -23,35 +23,35 @@ guarantees will likely evolve over time, but for now expect rapid breaking chang
 ## Who is this book for?
 
 This book has no expectations on the audience's background. It is ideal for any developer who 
-wants to quickly deliver decentralized apps or who are just to see how this landscape is changing 
-with the next generation of the internet. 
+wants to quickly deliver decentralized apps or who are just interested to see how this landscape 
+is changing with the next generation of the internet. 
 
 ## How to use this book.
 
-We try to structure the book so you get introduced to a new topic with a little background before 
-moving into our solution to solving particular challenges. Finally we'll include additional 
-information for followup reading and often a project.
+We try to structure the book so you get introduced to a new topic with a little background and 
+further reading before moving into a project that will be continuously developed throughout this
+book.
 
-Thoughout the book we'll be developing and breaking down a simple todo app, where we slowly 
-introduce more and more features as we shape it to solve real world challenges.
+The app that we will be developing and breaking down is a simple TODO app. We will be slowly 
+introducing you to more and more features as we shape it to something that is acually useful.
 
 We will be covering a broad range of topics, which will all require their own set of dependencies.
 To make sure, as a reader, you can follow allong, we have developed tools to manage the 
-dependencies in a secure environment. 
+dependencies in a secure environment. These will be covered in later chapters.
 
 ## Source Code
 
 The source files from this book can be found in the github repo 
 [GitHub](https://github.com/overengineered/docs) and will be found under the folder following the 
-pattern of `booktitle-chapter-section-title`.
+folder naming pattern of `booktitle-chapter-section-title`.
 
 ## Stack
 
 Briefly let's cover the stack that we will be working with. Later we'll have a gentle introduction 
 to many of them and others may not require direct interaction with, but it may be important to 
-know later.
+know for debugging purposes.
 
-You can follow up to learn more about these at anytime.
+You can follow up on any of these topics to learn more.
 
 ### Frontend
 
@@ -61,10 +61,10 @@ that. WebAssembly is how we are able to create apps that support a wide range of
 devices.
 
 * **Yew** - Yew is a Rust Crate similar to [React](https://reactjs.org/). They both use a virtual
-dom, return a JSX like syntax and have both a class and functional implementation with hook like 
-state and lifecycle management.
+dom, components return a JSX like syntax and have both a class and functional implementation with 
+hooks into state and lifecycle management.
 * **GraphQL** - [GraphQL](https://graphql.org/) was chosen as the primary server / client 
-interaction to minimize network traffic. With the ever growing number of devices we want to keep 
+communication to minimize network traffic. With the ever growing number of devices we want to keep 
 payloads as small as possible.  GraphQL provides a very nice abstraction for developers and has 
 existing client libraries for many languages including Rust.
 
@@ -76,7 +76,8 @@ All of the services that need to run to keep the lights running and the apps wor
 
 * **Rocket** - [Rocket](https://rocket.rs/) is the primary recommended way to create a user facing
 web server. Rocket is a Rust Crate that focuses on a great developer experience with an easy to 
-use API. We think this fits perfectly with what we are trying to accomplish.
+use API. We think this fits perfectly with what we are trying to accomplish. And many 
+Overengineered Rust Crates take inspiration from this.
 * **GraphQL** - Like previously mentioned for various reasons we use GraphQL. GraphQL is very easy 
 to integrate with Rocket.
 
@@ -84,11 +85,11 @@ to integrate with Rocket.
 
 These cover the infrastructure that the cloud at home services use to manage and deploy the apps 
 used for the cloud apps as well as the development environments. Don't worry most of this will 
-soon be abstracted away and will not require expertise in. We will cover enough information to 
-be able to unblock yourself in the case of an issue or unforseen problem.
+soon be abstracted away and will not require expertise in to use Overengineered. We will cover
+enough information to be able to unblock yourself in the case of an issue or unforseen problem.
 
-* **Docker** - We primarily use [Docker](https://docker.com/) for the build tools, but primarily 
-use [Containard](https://containerd.io/) for the container service.
+* **Docker** - We primarily use [Docker](https://docker.com/) for the build tools, but  use
+[Containard](https://containerd.io/) for the container service.
 * **Kubernetes** - [Kubernetes](https://kubernetes.io/) is a container orchestration service to 
 manage containers across all devices within your network. We specifically use 
 [k3s](https://k3s.io/) since it supports the arm architecture and can easily be ran on Raspberry 

@@ -3,20 +3,20 @@
 Let's get started! We'll start by installing all the prerequisites then dive into the fundamental 
 pieces of Overengineered.
 
-To ensure rapid development we want to minimize the setup times for your development environment 
-and tools. We accomplish this by utilizing docker and in the future will provide a web based 
+We want to ensure rapid development and minimize setup times for your development environment 
+and tools. We accomplish this by utilizing Docker and in the future will provide a web based 
 environment. We will go into more detail in the following chapters, but for now know, Our image 
 has Ubuntu as the base image. Also comes with all the tools preinstalled to follow along with the
-book.
+Overengineered books.
 
 
 ## Installing Docker
 
-### Ubuntu and Debian based OS including Raspberry Pi
+### Ubuntu and Debian based Operating Systems including Raspberry Pi
 
 You can find install instructions for ubuntu at 
 [docs.docker.com](https://docs.docker.com/engine/install/ubuntu/). To make tihs process even 
-easier We've created a convenience script to get you set up with docker quickly. Go ahead and copy 
+easier We've created a convenience script to get you set up with Docker quickly. Go ahead and copy 
 paste this into your terminal.
 
 ```rust,ignore
@@ -28,12 +28,14 @@ If you find any issues with the script, please, fill out an issue on
 
 #### Set up Overengineered
 
-Everything's shiny captain, a development environment doesn't exist yet. If you read a head you 
-can build the current state from the source.
+Everything's shiny captain, a development environment doesn't exist yet. If you read ahead you can
+build from the source.
 
 ### Mac Os X
 
 ### Windows
+
+**Note**: Will likly provide instructions for a VM using hypervisor.
 
 
 ## Building from source
