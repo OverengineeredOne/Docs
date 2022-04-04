@@ -4,8 +4,8 @@ Yew is a modern Rust framework for creating multi-threaded front-end web applica
 WebAssembly.
 
 Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
-Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
-threads.
+Inside, Yew's performance is acheived by minimizing DOM calls and offloading proccing into 
+background threads.
 
 ## Intoduction 
 
@@ -13,18 +13,18 @@ Let's take a look at how to build an example Yew app. If you are using the Overe
 development environment we are good to go and can skip the next step. If not, there are a couple 
 of prerequisites you'll need to set up.
 
-### Prerequisites. 
+### Prerequisites
 
-This step is only required if you are not using the development environment. You'll need to make 
-sure you have the following tools up to date.
+**This step is only required if you are not using the development environment.** You'll need to 
+make sure you have the following tools and they are up to date.
 
 * Rust
 * trunk
 * Compile target wasm32-unknown-unknown
 
-You can check out earlier chapters for instructions on installing rust.
+*You can reference earlier chapters for instructions on installing rust.*
 
-After Rust is installed, you can use Cargo to install `trunk` by running:
+After Rust is installed, you can use Cargo to install `trunk`.
 
 ```rust,ignore
 cargo install trunk
@@ -42,7 +42,7 @@ docker run -it -p 8080:8080 oedev /bin/bash
 ```
 
 Here we are adding `-p 8080:8080` to the earlier command to launch the development environment.
-This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+We are telling Docker that we want port 8080 to be opened inside container and we also want to
 map that to port 8080 on the host computer.
 
 Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.
@@ -154,33 +154,33 @@ turn update the component.
 Let's update our app method to test it out.
 
 ```rust,ignore
-use yet::{Callback, function_component, html, use_state};
+use yew::{Callback, function_component, html, use_state};
 
-#[function_component(UseState)]
-fn state() -> Html {
+#[function_component(App)]
+fn app() -> Html {
     let counter = use_state(|| 0);
-    let onClick = {
+    let onclick = {
         let counter = counter.clone();
         Callback::from(move |_| counter.set(*counter + 1))
     };
     html! {
-	<div>
-	    <button {onclick}>{ "Add one" }</button>
-	    <p>{ "Total: " }{ *counter }</p>
-	</div>
+		<div>
+		    <button {onclick}>{ "Add one" }</button>
+		    <p>{ "Total: " }{ *counter }</p>
+		</div>
     }
 }
 
 ```
 
-You can see here we call `use_state()` and set it to counter. We're also passing a callback 
-function inside. This tells Yew to default the value. In this case `0`.
+You can see here we call `use_state()` and assign it to the variable `counter`. We're also 
+passing in a callback. This allows us to set a default the value. In this case `0`.
 
 We use `counter` two ways. One directly in the return value. We `derefrence` `counter` and 
 display that as the "total" value.
 
 The other is in the `onClick` `handle`. Inside this callback we clone the reference and move it's 
-ownship into the `Callback` struct. You can see `onClick` bing passed into the `<button />` 
+ownship into the `Callback` struct. You can see `onClick` being passed into the `<button />`'s 
 `props`. Yew will map the onclick `HTMLEvent` to this `onClick` function you defined. When the 
 "Add One Button" is clicked you will see the `counter`'s value get set to `counter + 1`.
 
