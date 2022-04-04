@@ -373,9 +373,14 @@ settings.</p>
 <li>Fill out the details and click <code>generate</code>.</li>
 <li>Make sure you copy the token.</li>
 </ul>
+<p>Now create a new file in the root of your home directory called <code>ghtoken.txt</code> with the contents of
+the copied token.</p>
+<pre><code class="language-bash ignore">echo &lt;your_token&gt; &gt; ~/ghtoken.txt
+</code></pre>
+<p>Now edit this file and paste the contents of your GitHub token in it.</p>
 <p>Now from the SSH session we established with the Docker container run the command to login. 
-Replace &lt;your_token&gt; with the token we copied in the previous step.</p>
-<pre><code class="language-rust ignore">gh auth login --with-token &lt;your_token&gt;
+Replace &lt;your_token&gt; with the token file we created in the previous step.</p>
+<pre><code class="language-bash ignore">gh auth login --with-token &lt; ~/ghtoken.txt
 </code></pre>
 <p><strong>Note:</strong> This step will have to be done each time you launch the dev environment.</p>
 <h2 id="stopping-the-container"><a class="header" href="#stopping-the-container">Stopping the container</a></h2>
@@ -408,21 +413,17 @@ are bulilt and shipped.</p>
 <p>I'll never do as good as a job as 
 <a href="https://www.youtube.com/watch?v=HktWin_LPf4">Lin Clark's A Cartoon Intro to WebAssembly</a>, but
 I'll try.</p>
-<p>WebAssembly solves the problem to allow applications built to be used in the browser, written
-in languages other than Javascript. This is a problem because Javascript is much slower than 
-compiled languages and allows us to do some low level programming to solve problems that were not
-previously possible. Since the code is compiled to the WebAssembly target and converted to a 
-binary format this allows applications to run, without installation and provide native performance.</p>
-<h2 id="background"><a class="header" href="#background">Background</a></h2>
-<p>Javascript was created back in 1995 and was the only way to interact with the DOM and manipulate 
-HTML. Overall JS performance is fairly poor, until the introduction of just in time compilers, 
-which drastically increased performance and interactivity into what it is today.</p>
+<p>WebAssembly solves the problem to allow applications to be built for the browser, written in
+languages other than Javascript. Javascript is much slower and there are a lot of problems that 
+can not be solved with it today. WebAssembly is a low level assembly like lanague that is 
+converted into a binary format this allows applications to run, without installation and provide
+native performance. It also works on Windows, Mac, Linux, iOS, Android, and many others.</p>
 <h2 id="the-future-of-webassembly"><a class="header" href="#the-future-of-webassembly">The future of WebAssembly</a></h2>
-<p>Like I mentioned WebAssembly is still new, for example today there is a lot of JS interopt. As 
-data is passed around it's serialzed / deserialized and causes some major performance issues that 
-in some cases doesn't make it practical to use. In the future it will have more funcationality 
+<p>WebAssembly is still new, for example today there is a lot of JS interopt. As data is passed
+around it's serialzed / deserialized and causes some major performance issues that in some cases
+doesn't make it practical to use. In the future it will have more funcationality
 such as direct DOM and Websocket access.</p>
-<h2 id="wasi-and-beyond"><a class="header" href="#wasi-and-beyond">WASI and beyond</a></h2>
+<h2 id="wasi"><a class="header" href="#wasi">WASI</a></h2>
 <p>WASI or the WebAssembly System Interface is exciting since it brings WebAssembly to the backend. 
 This is exciting for a few reasons, every WASI module runs in it's secure environment, interfaces 
 allow for easy interopt between languages, and finally cold start times are nearly instantanous.
@@ -431,22 +432,22 @@ Drastically quicker than Docker.</p>
 <p>Yew is a modern Rust framework for creating multi-threaded front-end web applications with 
 WebAssembly.</p>
 <p>Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
-Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
-threads.</p>
+Inside, Yew's performance is acheived by minimizing DOM calls and offloading proccing into 
+background threads.</p>
 <h2 id="intoduction"><a class="header" href="#intoduction">Intoduction</a></h2>
 <p>Let's take a look at how to build an example Yew app. If you are using the Overengineered 
 development environment we are good to go and can skip the next step. If not, there are a couple 
 of prerequisites you'll need to set up.</p>
-<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites.</a></h3>
-<p>This step is only required if you are not using the development environment. You'll need to make 
-sure you have the following tools up to date.</p>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
+<p><strong>This step is only required if you are not using the development environment.</strong> You'll need to 
+make sure you have the following tools and they are up to date.</p>
 <ul>
 <li>Rust</li>
 <li>trunk</li>
 <li>Compile target wasm32-unknown-unknown</li>
 </ul>
-<p>You can check out earlier chapters for instructions on installing rust.</p>
-<p>After Rust is installed, you can use Cargo to install <code>trunk</code> by running:</p>
+<p><em>You can reference earlier chapters for instructions on installing rust.</em></p>
+<p>After Rust is installed, you can use Cargo to install <code>trunk</code>.</p>
 <pre><code class="language-rust ignore">cargo install trunk
 </code></pre>
 <p>The compile target is covered later.</p>
@@ -456,7 +457,7 @@ later.</p>
 <pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
 </code></pre>
 <p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the development environment.
-This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+We are telling Docker that we want port 8080 to be opened inside container and we also want to
 map that to port 8080 on the host computer.</p>
 <p>Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.</p>
 <pre><code class="language-rust ignore">cargo new example-yew-project
@@ -536,30 +537,30 @@ take a look at <a href="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">use_state</a>.
 <code>UseStateHandle</code> it returns has a method that allows us to change the state value. This will in 
 turn update the component.</p>
 <p>Let's update our app method to test it out.</p>
-<pre><code class="language-rust ignore">use yet::{Callback, function_component, html, use_state};
+<pre><code class="language-rust ignore">use yew::{Callback, function_component, html, use_state};
 
-#[function_component(UseState)]
-fn state() -&gt; Html {
+#[function_component(App)]
+fn app() -&gt; Html {
     let counter = use_state(|| 0);
-    let onClick = {
+    let onclick = {
         let counter = counter.clone();
         Callback::from(move |_| counter.set(*counter + 1))
     };
     html! {
-	&lt;div&gt;
-	    &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
-	    &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
-	&lt;/div&gt;
+		&lt;div&gt;
+		    &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
+		    &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
+		&lt;/div&gt;
     }
 }
 
 </code></pre>
-<p>You can see here we call <code>use_state()</code> and set it to counter. We're also passing a callback 
-function inside. This tells Yew to default the value. In this case <code>0</code>.</p>
+<p>You can see here we call <code>use_state()</code> and assign it to the variable <code>counter</code>. We're also 
+passing in a callback. This allows us to set a default the value. In this case <code>0</code>.</p>
 <p>We use <code>counter</code> two ways. One directly in the return value. We <code>derefrence</code> <code>counter</code> and 
 display that as the &quot;total&quot; value.</p>
 <p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the reference and move it's 
-ownship into the <code>Callback</code> struct. You can see <code>onClick</code> bing passed into the <code>&lt;button /&gt;</code> 
+ownship into the <code>Callback</code> struct. You can see <code>onClick</code> being passed into the <code>&lt;button /&gt;</code>'s 
 <code>props</code>. Yew will map the onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the 
 &quot;Add One Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
 <p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>
@@ -576,57 +577,156 @@ recommend following up with the Yew documentation.</p>
 <li><a href="https://yew.rs/docs/concepts/router">Router</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="component-library"><a class="header" href="#component-library">Component Library</a></h1>
-<p>Now that we know how to create components we would like to build something a little nicer. But 
-creating high quality complex user interfaces from scratch is a big challenge. This is where a 
-Component Library can help.</p>
-<p>At this time there is not a feature complete component library for Yew. And of the handful of
-existing projects <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one 
+<p>Now that we know how to create components we would like to build something that's more ascetically
+pleasing. But creating high quality complex user interfaces from scratch is a big challenge. This
+is where a Component Library can help. They establish the design language and as a developer we
+get to spend less time thinking about this.</p>
+<p>At this time there is not a feature complete component library for Yew. And out of the handful of
+existing projects, <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one
 recently maintained.</p>
 <h2 id="patternfly"><a class="header" href="#patternfly">Patternfly</a></h2>
 <p>Patternfly is an open source design system to create consistent and usable applications
-experiences. Pattternfly provides clear standards and guidelines to build efficently. It was 
+experiences. Patternfly provides clear standards and guidelines to build efficiently. It was
 designed as a React component library, however there is a community effort recreate the components
 on an as needed basis for Yew.</p>
-<p>Given the current state it would be best to start to get to know the library though the React 
-documentation.</p>
+<p>Given the current state of the Rust project, it would be best to start to get to know the library
+though the React documentation.</p>
+<p>Getting started with Patternfly is pretty straightforward, you'll get immediate value from two
+primary sections. Components and Layouts.</p>
 <h2 id="components"><a class="header" href="#components">Components</a></h2>
 <p>If we pull up the documentation for the <a href="https://www.patternfly.org/v4/components/alert">Alert</a>
-component we're greeted to all of the examples. The different examples show the design of the 
-component and how it can be used. </p>
-<p>The <code>&lt;/&gt; JS</code> button on each example allows you to view what the code looks like. The bottom of the
-page contains the props, which tells you about all of the properties to control the behavior of
-the component.</p>
+component we're greeted to all of the examples. The different examples show the implementation of
+the component and different ways to use it.</p>
+<p>You can take a look at the code under each example with the <code>&lt;/&gt; JS</code> button. The very bottom of
+the page contains the props, which tells you about all of the properties to control the behavior
+of the component.</p>
 <h3 id="guidelines"><a class="header" href="#guidelines">Guidelines</a></h3>
-<p>The <a href="https://www.patternfly.org/v4/components/alert/design-guidelines">Design Guidelines</a> exists 
-for every component and provides details what the expected behaviors and how the user interacts 
-with it. Many will also contain best practicies and how they should be used with the other 
+<p>The <a href="https://www.patternfly.org/v4/components/alert/design-guidelines">Design Guidelines</a> exists
+for most component and provides details what the expected behaviors and how the user interacts
+with it. Many will also contain best practices and how they should be used with the other
 Patternfly components.</p>
 <h3 id="patternfly-rs"><a class="header" href="#patternfly-rs">patternfly-rs</a></h3>
-<p>Let's look at the equivalent <a href="https://ctron.github.io/patternfly-yew-quickstart/">Rust Doc</a> and 
-find the <code>Alert</code> component. patternfly-rs uses the same styles sheets as the React library so the
-components should look identical. Like the upstream Patternfly documentation, it should contain 
-the code snippit, but currently nothing else.</p>
-<p>At the current stage there is not a lot of componenets and the example page does not meet parity
-but should be a good place to start.</p>
-<p>There are also more components completed than the ones on the example. A better resource for an up
-to date list of components avalible the 
-<a href="https://docs.rs/patternfly-yew/latest/patternfly_yew/index.html">Rust Docs</a> will be in sync with 
-the upstream repository.</p>
+<p>Let's look at the equivalent <a href="https://ctron.github.io/patternfly-yew-quickstart/">Rust Doc</a> and
+find the <code>Alert</code> component. patternfly-rs uses the same CSS as the React library so the
+components should look identical. Like the upstream Patternfly documentation, it should contain
+the code snippet, but currently nothing else. Unlike the React documentation, the code is just
+simply positioned below.</p>
+<p>At the current stage there is not a lot of components and the example page does not meet parity
+with React, but should be a good place to start.</p>
+<p>To see all of the components that have been completed, a better resource is avalible on the
+<a href="https://docs.rs/patternfly-yew/latest/patternfly_yew/index.html">Rust Docs</a>.</p>
 <h2 id="using-patternfly-rs"><a class="header" href="#using-patternfly-rs">Using patternfly-rs</a></h2>
 <p>patternfly-rs also includes a <a href="https://github.com/ctron/patternfly-yew">quickstart template</a> that
-ships with the patternfly-rs documentaiton page. Normally from the github page you click the use
-<code>Use this template</code> button, clone the repo and install everything with npm.</p>
-<p>But the Overengineered CLI that comes pre-installed in the development environment. We can do all 
-of this with one step with the following command, replacing <code>&lt;name&gt;</code> with the name of the project 
-name. This clones the repo using the name as the name of the repo.</p>
+ships with the entire patternfly-rs documentation page. Normally from the github page you click
+the use <code>Use this template</code> button, clone the repo and install everything with npm.</p>
+<p>But the Overengineered CLI can take care of this for us. We can do all of this with a single
+command. You don't have to do this now but you can use the following command, replacing <code>&lt;name&gt;</code>
+with the name of the project name. This will clone the repository using the name as the name of
+the repo.</p>
 <pre><code class="language-rust ignore">oecli pwa --new &lt;name&gt;
 </code></pre>
-<p>Just like our previous examples, run <code>trunk serve</code> and head to your browser to check it out. </p>
-<p><strong>Note</strong>: <code>pwa</code> here stands for Progressive Web App. Progressive web apps are apps that load a 
-skeleton and hydrate components as they are ready. At this current state, Overengineered does not 
-offer server side rendering, or this progressive hydration. These are goals further down the 
+<p>Just like our previous examples, run <code>trunk serve</code> and head to your browser to check it out.</p>
+<p><strong>Note</strong>: <code>pwa</code> here stands for Progressive Web App. Progressive web apps are apps that load a
+skeleton and hydrate components as they are ready. At this current state, Overengineered does not
+offer server side rendering, or this progressive hydration. These are goals further down the
 roadmap.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="todo-app"><a class="header" href="#todo-app">Todo App</a></h1>
+<p>Now let's apply what we have covered so far and build something useful. We want something that
+can be viewed on desktop mobile, and be feature rich.</p>
+<p>Let's create a TODO app. As a user I should be able to create a todo and assign it to myself or
+another person. TODO's are automatically generated for daily tasks, and some are triggered from an
+external integration, such as Alexa. And we will create some automation to automatically cross off
+our TODOs. We'll add additional features like notifications, change history, and some analytical
+pages or dashboards.</p>
+<h2 id="create-the-project"><a class="header" href="#create-the-project">Create the project</a></h2>
+<p>We want to clone the patternfly-rs template. If you recall we can easily do this with the <code>pwa</code>
+subcommand of <code>oecli</code>. Again make sure you are logged into github
+<code>gh auth login --with-token &lt;token_file&gt;</code>.</p>
+<pre><code class="language-rust ignore">oecli pwa --new todo-client
+</code></pre>
+<p>Now you can navigate into the new directory and try serving the page with trunk. <code>trunk serve</code>
+and accessing with your browser as before.</p>
+<h3 id="template"><a class="header" href="#template">Template</a></h3>
+<p>The default template comes with all the code for the example page. We don't really care about it.
+Inside the <code>./src</code> folder, we can delete everything but <code>main.rs</code> and <code>app.rs</code>. If we do this, we
+can also get rid of all of the structs for Yew Routing. The only one we should care about is the
+struts <code>Model</code></p>
+<pre><code class="language-rust ignore">use patternfly_yew::*;
+use yew::prelude::*;
+
+pub struct Model {}
+
+impl yew::Component for Model {
+	type Message = ();
+	type Properties = ();
+	fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
+		Self {}
+	}
+
+	fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
+		&lt;&gt;
+
+		&lt;/&gt;
+	}
+}
+
+</code></pre>
+<p>You may also notice this is not a function_component, you can go ahead and convert that on your
+own.</p>
+<h2 id="design"><a class="header" href="#design">Design</a></h2>
+<p>Now that we have a blank page we will start simple. We want to have some text box for entering in
+a todo and a button to submit. We'll also need to see a list of todos and some way to cross them
+off. We'll stick with these features for this chapter.</p>
+<p>Let's break down some of the components we'll be using.</p>
+<h3 id="add-a-todo"><a class="header" href="#add-a-todo">Add a todo</a></h3>
+<p>For the new TODO entry, a simple design would be to just place a text box and a button next to
+each other.</p>
+<pre><code class="language-txt ignore">+---------------------+ +--------+
+|    Text Box         | | Submit |
++---------------------+ +--------+
+</code></pre>
+<p>We care about the text in the box and when the button is submitted we want to &quot;submit&quot; the data
+that was entered into the text box.</p>
+<p>What Patternfly Components would we need and how would we lay them out? Well we can find the
+Button in the patternfly-rs documentation but nothing that really fits the text box. The upstream
+Patternfly React documentation does have the
+<a href="https://www.patternfly.org/v4/components/text-input">Text Input</a>. But ah, it does exist in
+the
+<a href="https://docs.rs/patternfly-yew/latest/patternfly_yew/struct.TextInput.html">patternfly-rs docs</a></p>
+<p>Ok, now how would we place them next to each other? I'll let you take look at the layouts to find
+out what works best: <a href="https://ctron.github.io/">patternfly-rs</a></p>
+<p>Given this, let's see what our component should start to look like.</p>
+<pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
+fn new_todo() -&gt; Html {
+	html! {
+		&lt;Split gutter=true&gt;
+			&lt;SplitItem&gt;
+				&lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
+			&lt;/SplitItem&gt;
+			&lt;SplitItem&gt;
+				&lt;Button
+					disabled={false}
+					label={ &quot;Create&quot; }
+					variant={Variant::Primary}
+				/&gt;
+			&lt;/SplitItem&gt;
+		&lt;/Split&gt;
+	}
+}
+</code></pre>
+<p>You can add this directly in the Model component and serve it to test it out.</p>
+<pre><code class="language-rust ignore">impl yew::Component for Model {
+...
+	fn view(&amp;self, _:&amp;Context&lt;Self&gt;) -&gt; Html {
+		html! {
+			&lt;&gt;
+				&lt;NewTodoBar /&gt;
+			&lt;/&gt;
+		}
+	}
+</code></pre>
+<p>Looks much better than the counter example earlier.</p>
+<p>... Breakdown component ...</p>
 
                     </main>
 

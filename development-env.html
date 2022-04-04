@@ -180,9 +180,14 @@ settings.</p>
 <li>Fill out the details and click <code>generate</code>.</li>
 <li>Make sure you copy the token.</li>
 </ul>
+<p>Now create a new file in the root of your home directory called <code>ghtoken.txt</code> with the contents of
+the copied token.</p>
+<pre><code class="language-bash ignore">echo &lt;your_token&gt; &gt; ~/ghtoken.txt
+</code></pre>
+<p>Now edit this file and paste the contents of your GitHub token in it.</p>
 <p>Now from the SSH session we established with the Docker container run the command to login. 
-Replace &lt;your_token&gt; with the token we copied in the previous step.</p>
-<pre><code class="language-rust ignore">gh auth login --with-token &lt;your_token&gt;
+Replace &lt;your_token&gt; with the token file we created in the previous step.</p>
+<pre><code class="language-bash ignore">gh auth login --with-token &lt; ~/ghtoken.txt
 </code></pre>
 <p><strong>Note:</strong> This step will have to be done each time you launch the dev environment.</p>
 <h2 id="stopping-the-container"><a class="header" href="#stopping-the-container">Stopping the container</a></h2>

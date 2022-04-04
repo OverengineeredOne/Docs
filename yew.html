@@ -146,22 +146,22 @@
 <p>Yew is a modern Rust framework for creating multi-threaded front-end web applications with 
 WebAssembly.</p>
 <p>Like React, Yew is a component based framework which makes it easy to create interactive UIs. 
-Inside Yew performance is acheived by minimizing DOM calls and offloading proccing into background
-threads.</p>
+Inside, Yew's performance is acheived by minimizing DOM calls and offloading proccing into 
+background threads.</p>
 <h2 id="intoduction"><a class="header" href="#intoduction">Intoduction</a></h2>
 <p>Let's take a look at how to build an example Yew app. If you are using the Overengineered 
 development environment we are good to go and can skip the next step. If not, there are a couple 
 of prerequisites you'll need to set up.</p>
-<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites.</a></h3>
-<p>This step is only required if you are not using the development environment. You'll need to make 
-sure you have the following tools up to date.</p>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
+<p><strong>This step is only required if you are not using the development environment.</strong> You'll need to 
+make sure you have the following tools and they are up to date.</p>
 <ul>
 <li>Rust</li>
 <li>trunk</li>
 <li>Compile target wasm32-unknown-unknown</li>
 </ul>
-<p>You can check out earlier chapters for instructions on installing rust.</p>
-<p>After Rust is installed, you can use Cargo to install <code>trunk</code> by running:</p>
+<p><em>You can reference earlier chapters for instructions on installing rust.</em></p>
+<p>After Rust is installed, you can use Cargo to install <code>trunk</code>.</p>
 <pre><code class="language-rust ignore">cargo install trunk
 </code></pre>
 <p>The compile target is covered later.</p>
@@ -171,7 +171,7 @@ later.</p>
 <pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
 </code></pre>
 <p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the development environment.
-This is saying that we want port 8080 to be opened inside the Docker container and we also want to
+We are telling Docker that we want port 8080 to be opened inside container and we also want to
 map that to port 8080 on the host computer.</p>
 <p>Once your environment is relaunched with port 8080 mapped let's go ahead and create our project.</p>
 <pre><code class="language-rust ignore">cargo new example-yew-project
@@ -251,30 +251,30 @@ take a look at <a href="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">use_state</a>.
 <code>UseStateHandle</code> it returns has a method that allows us to change the state value. This will in 
 turn update the component.</p>
 <p>Let's update our app method to test it out.</p>
-<pre><code class="language-rust ignore">use yet::{Callback, function_component, html, use_state};
+<pre><code class="language-rust ignore">use yew::{Callback, function_component, html, use_state};
 
-#[function_component(UseState)]
-fn state() -&gt; Html {
+#[function_component(App)]
+fn app() -&gt; Html {
     let counter = use_state(|| 0);
-    let onClick = {
+    let onclick = {
         let counter = counter.clone();
         Callback::from(move |_| counter.set(*counter + 1))
     };
     html! {
-	&lt;div&gt;
-	    &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
-	    &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
-	&lt;/div&gt;
+		&lt;div&gt;
+		    &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
+		    &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
+		&lt;/div&gt;
     }
 }
 
 </code></pre>
-<p>You can see here we call <code>use_state()</code> and set it to counter. We're also passing a callback 
-function inside. This tells Yew to default the value. In this case <code>0</code>.</p>
+<p>You can see here we call <code>use_state()</code> and assign it to the variable <code>counter</code>. We're also 
+passing in a callback. This allows us to set a default the value. In this case <code>0</code>.</p>
 <p>We use <code>counter</code> two ways. One directly in the return value. We <code>derefrence</code> <code>counter</code> and 
 display that as the &quot;total&quot; value.</p>
 <p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the reference and move it's 
-ownship into the <code>Callback</code> struct. You can see <code>onClick</code> bing passed into the <code>&lt;button /&gt;</code> 
+ownship into the <code>Callback</code> struct. You can see <code>onClick</code> being passed into the <code>&lt;button /&gt;</code>'s 
 <code>props</code>. Yew will map the onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the 
 &quot;Add One Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
 <p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>

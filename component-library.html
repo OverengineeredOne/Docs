@@ -143,55 +143,58 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="component-library"><a class="header" href="#component-library">Component Library</a></h1>
-<p>Now that we know how to create components we would like to build something a little nicer. But 
-creating high quality complex user interfaces from scratch is a big challenge. This is where a 
-Component Library can help.</p>
-<p>At this time there is not a feature complete component library for Yew. And of the handful of
-existing projects <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one 
+<p>Now that we know how to create components we would like to build something that's more ascetically
+pleasing. But creating high quality complex user interfaces from scratch is a big challenge. This
+is where a Component Library can help. They establish the design language and as a developer we
+get to spend less time thinking about this.</p>
+<p>At this time there is not a feature complete component library for Yew. And out of the handful of
+existing projects, <a href="https://github.com/ctron/patternfly-yew">patternfly-yew</a> is the only one
 recently maintained.</p>
 <h2 id="patternfly"><a class="header" href="#patternfly">Patternfly</a></h2>
 <p>Patternfly is an open source design system to create consistent and usable applications
-experiences. Pattternfly provides clear standards and guidelines to build efficently. It was 
+experiences. Patternfly provides clear standards and guidelines to build efficiently. It was
 designed as a React component library, however there is a community effort recreate the components
 on an as needed basis for Yew.</p>
-<p>Given the current state it would be best to start to get to know the library though the React 
-documentation.</p>
+<p>Given the current state of the Rust project, it would be best to start to get to know the library
+though the React documentation.</p>
+<p>Getting started with Patternfly is pretty straightforward, you'll get immediate value from two
+primary sections. Components and Layouts.</p>
 <h2 id="components"><a class="header" href="#components">Components</a></h2>
 <p>If we pull up the documentation for the <a href="https://www.patternfly.org/v4/components/alert">Alert</a>
-component we're greeted to all of the examples. The different examples show the design of the 
-component and how it can be used. </p>
-<p>The <code>&lt;/&gt; JS</code> button on each example allows you to view what the code looks like. The bottom of the
-page contains the props, which tells you about all of the properties to control the behavior of
-the component.</p>
+component we're greeted to all of the examples. The different examples show the implementation of
+the component and different ways to use it.</p>
+<p>You can take a look at the code under each example with the <code>&lt;/&gt; JS</code> button. The very bottom of
+the page contains the props, which tells you about all of the properties to control the behavior
+of the component.</p>
 <h3 id="guidelines"><a class="header" href="#guidelines">Guidelines</a></h3>
-<p>The <a href="https://www.patternfly.org/v4/components/alert/design-guidelines">Design Guidelines</a> exists 
-for every component and provides details what the expected behaviors and how the user interacts 
-with it. Many will also contain best practicies and how they should be used with the other 
+<p>The <a href="https://www.patternfly.org/v4/components/alert/design-guidelines">Design Guidelines</a> exists
+for most component and provides details what the expected behaviors and how the user interacts
+with it. Many will also contain best practices and how they should be used with the other
 Patternfly components.</p>
 <h3 id="patternfly-rs"><a class="header" href="#patternfly-rs">patternfly-rs</a></h3>
-<p>Let's look at the equivalent <a href="https://ctron.github.io/patternfly-yew-quickstart/">Rust Doc</a> and 
-find the <code>Alert</code> component. patternfly-rs uses the same styles sheets as the React library so the
-components should look identical. Like the upstream Patternfly documentation, it should contain 
-the code snippit, but currently nothing else.</p>
-<p>At the current stage there is not a lot of componenets and the example page does not meet parity
-but should be a good place to start.</p>
-<p>There are also more components completed than the ones on the example. A better resource for an up
-to date list of components avalible the 
-<a href="https://docs.rs/patternfly-yew/latest/patternfly_yew/index.html">Rust Docs</a> will be in sync with 
-the upstream repository.</p>
+<p>Let's look at the equivalent <a href="https://ctron.github.io/patternfly-yew-quickstart/">Rust Doc</a> and
+find the <code>Alert</code> component. patternfly-rs uses the same CSS as the React library so the
+components should look identical. Like the upstream Patternfly documentation, it should contain
+the code snippet, but currently nothing else. Unlike the React documentation, the code is just
+simply positioned below.</p>
+<p>At the current stage there is not a lot of components and the example page does not meet parity
+with React, but should be a good place to start.</p>
+<p>To see all of the components that have been completed, a better resource is avalible on the
+<a href="https://docs.rs/patternfly-yew/latest/patternfly_yew/index.html">Rust Docs</a>.</p>
 <h2 id="using-patternfly-rs"><a class="header" href="#using-patternfly-rs">Using patternfly-rs</a></h2>
 <p>patternfly-rs also includes a <a href="https://github.com/ctron/patternfly-yew">quickstart template</a> that
-ships with the patternfly-rs documentaiton page. Normally from the github page you click the use
-<code>Use this template</code> button, clone the repo and install everything with npm.</p>
-<p>But the Overengineered CLI that comes pre-installed in the development environment. We can do all 
-of this with one step with the following command, replacing <code>&lt;name&gt;</code> with the name of the project 
-name. This clones the repo using the name as the name of the repo.</p>
+ships with the entire patternfly-rs documentation page. Normally from the github page you click
+the use <code>Use this template</code> button, clone the repo and install everything with npm.</p>
+<p>But the Overengineered CLI can take care of this for us. We can do all of this with a single
+command. You don't have to do this now but you can use the following command, replacing <code>&lt;name&gt;</code>
+with the name of the project name. This will clone the repository using the name as the name of
+the repo.</p>
 <pre><code class="language-rust ignore">oecli pwa --new &lt;name&gt;
 </code></pre>
-<p>Just like our previous examples, run <code>trunk serve</code> and head to your browser to check it out. </p>
-<p><strong>Note</strong>: <code>pwa</code> here stands for Progressive Web App. Progressive web apps are apps that load a 
-skeleton and hydrate components as they are ready. At this current state, Overengineered does not 
-offer server side rendering, or this progressive hydration. These are goals further down the 
+<p>Just like our previous examples, run <code>trunk serve</code> and head to your browser to check it out.</p>
+<p><strong>Note</strong>: <code>pwa</code> here stands for Progressive Web App. Progressive web apps are apps that load a
+skeleton and hydrate components as they are ready. At this current state, Overengineered does not
+offer server side rendering, or this progressive hydration. These are goals further down the
 roadmap.</p>
 
                     </main>

@@ -150,21 +150,17 @@ are bulilt and shipped.</p>
 <p>I'll never do as good as a job as 
 <a href="https://www.youtube.com/watch?v=HktWin_LPf4">Lin Clark's A Cartoon Intro to WebAssembly</a>, but
 I'll try.</p>
-<p>WebAssembly solves the problem to allow applications built to be used in the browser, written
-in languages other than Javascript. This is a problem because Javascript is much slower than 
-compiled languages and allows us to do some low level programming to solve problems that were not
-previously possible. Since the code is compiled to the WebAssembly target and converted to a 
-binary format this allows applications to run, without installation and provide native performance.</p>
-<h2 id="background"><a class="header" href="#background">Background</a></h2>
-<p>Javascript was created back in 1995 and was the only way to interact with the DOM and manipulate 
-HTML. Overall JS performance is fairly poor, until the introduction of just in time compilers, 
-which drastically increased performance and interactivity into what it is today.</p>
+<p>WebAssembly solves the problem to allow applications to be built for the browser, written in
+languages other than Javascript. Javascript is much slower and there are a lot of problems that 
+can not be solved with it today. WebAssembly is a low level assembly like lanague that is 
+converted into a binary format this allows applications to run, without installation and provide
+native performance. It also works on Windows, Mac, Linux, iOS, Android, and many others.</p>
 <h2 id="the-future-of-webassembly"><a class="header" href="#the-future-of-webassembly">The future of WebAssembly</a></h2>
-<p>Like I mentioned WebAssembly is still new, for example today there is a lot of JS interopt. As 
-data is passed around it's serialzed / deserialized and causes some major performance issues that 
-in some cases doesn't make it practical to use. In the future it will have more funcationality 
+<p>WebAssembly is still new, for example today there is a lot of JS interopt. As data is passed
+around it's serialzed / deserialized and causes some major performance issues that in some cases
+doesn't make it practical to use. In the future it will have more funcationality
 such as direct DOM and Websocket access.</p>
-<h2 id="wasi-and-beyond"><a class="header" href="#wasi-and-beyond">WASI and beyond</a></h2>
+<h2 id="wasi"><a class="header" href="#wasi">WASI</a></h2>
 <p>WASI or the WebAssembly System Interface is exciting since it brings WebAssembly to the backend. 
 This is exciting for a few reasons, every WASI module runs in it's secure environment, interfaces 
 allow for easy interopt between languages, and finally cold start times are nearly instantanous.
