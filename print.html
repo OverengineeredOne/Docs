@@ -698,7 +698,7 @@ progressive hydration. These are goals further down the road map.</p>
 <p>Now let's apply what we have covered so far and build something useful. We want
 something that can be viewed on desktop mobile, and be feature rich.</p>
 <p>Let's create a TODO app. As a user I should be able to create a todo and assign
-it to myself or another person. TODO's are automatically generated for daily
+it to myself or another person. TODOs are automatically generated for daily
 tasks, and some are triggered from an external integration, such as Alexa.
 And we will create some automation to automatically cross off our TODOs. We'll
 add additional features like notifications, change history, and some analytical
@@ -722,17 +722,17 @@ use yew::prelude::*;
 pub struct Model {}
 
 impl yew::Component for Model {
-	type Message = ();
-	type Properties = ();
-	fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
-		Self {}
-	}
+  type Message = ();
+  type Properties = ();
+  fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
+    Self {}
+  }
 
-	fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
-		&lt;&gt;
+  fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
+    &lt;&gt;
 
-		&lt;/&gt;
-	}
+    &lt;/&gt;
+  }
 }
 
 </code></pre>
@@ -765,23 +765,24 @@ the layouts to find out what works best:
 <p>Given this, let's see what our component should start to look like.</p>
 <pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
 fn new_todo() -&gt; Html {
-	html! {
-		&lt;Split gutter=true&gt;
-			&lt;SplitItem&gt;
-				&lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
-			&lt;/SplitItem&gt;
-			&lt;SplitItem&gt;
-				&lt;Button
-					disabled={false}
-					label={ &quot;Create&quot; }
-					variant={Variant::Primary}
-				/&gt;
-			&lt;/SplitItem&gt;
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem&gt;
+        &lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button
+          disabled={false}
+          label={ &quot;Create&quot; }
+          variant={Variant::Primary}
+        /&gt;
+      &lt;/SplitItem&gt;
     &lt;/Split&gt;
   }
 }
 </code></pre>
-<p>You can add this directly in the Model component and serve it to test it out.</p>
+<p>You can add this directly in the Model component and use <code>trunk serve</code> it to
+test it out.</p>
 <pre><code class="language-rust ignore">impl yew::Component for Model {
 ...
 fn view(&amp;self, _:&amp;Context&lt;Self&gt;) -&gt; Html {
@@ -792,8 +793,71 @@ fn view(&amp;self, _:&amp;Context&lt;Self&gt;) -&gt; Html {
   }
 }
 </code></pre>
-<p>Looks much better than the counter example earlier.</p>
-<p>... Breakdown component ...</p>
+<p>Looks much better than the counter example earlier, but we can still do better.
+Let's find some layouts that might work for us. Our goal is to create something
+like this.</p>
+<pre><code class="language-txt ignore">+----------------------------------------+
+| +------------------------------------+ |
+| | +---------------------+ +--------+ | |
+| | |    Text Box         | | Submit | | |
+| | +---------------------+ +--------+ | |
+| +------------------------------------+ |
+|                                        |
+| +------------------------------------+ |
+| |                                    | |
+| |                                    | |
+| |                                    | |
+| |                                    | |
+| +------------------------------------+ |
++----------------------------------------+
+</code></pre>
+<p>Where the <code>NewTodoBar</code> component is centered within the parent component and
+the <code>TextInput</code> fills the space up to the button. The parent component should
+fill the width that's available and down to a minium of some value that looks
+good on a mobile display.</p>
+<p>There should be one additional parent that sets a max width. This component
+should also pad the content. Other than the <code>NewTodoBar</code> there should be a
+section to display the current TODOs. We'll use a <code>Card</code> as a placeholder for
+now. All of this should be placed inside a layout.</p>
+<h2 id="layouts"><a class="header" href="#layouts">Layouts</a></h2>
+<p>In Patternfly there are seven different layouts to help compose your web app.
+We can briefly cover each of them and what they are good for.</p>
+<h3 id="stack-1"><a class="header" href="#stack-1">Stack</a></h3>
+<p>A <a href="patternfly.org/v4/layouts/stack">stack</a> will position items vertically in a
+container. Optionally one item can be used to fill the remaining space. All
+children will be padded and centered adding a nice border. By default the
+components are crammed together but can add spacing between with the optional
+gutter.</p>
+<h3 id="split"><a class="header" href="#split">Split</a></h3>
+<p><a href="patternfly.org/v4/layouts/split">Split</a> is pretty much exactly the same as
+stack, but horizontally. This one also has the option of wrapping the children
+into an extra row if it doesn't fit the width of the screen. When viewing the
+example adjust the width of the browser and you can see how the components
+wrap.</p>
+<h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
+<p><a href="patternfly.org/v4/layouts/grid">Grid</a> is allows you to layout content on a
+fixed-size 12 column grid. This makes the behavior predictable and divisible by
+1/2, 1/3, 1/4, 1/6 evenly. You can construct children of any size.</p>
+<p>Grid does have a responsive ordering features, which allows you change which
+order they appear based on the current window size.</p>
+<h3 id="gallery"><a class="header" href="#gallery">Gallery</a></h3>
+<p>Like Grid, the <a href="patternfly.org/v4/layouts/gallery">Gallery</a> will use a grid
+like layout this time evenly placing the children. The view is response, so
+depending on the screen size you can adjust the sizing of the children.</p>
+<h3 id="level"><a class="header" href="#level">Level</a></h3>
+<p><a href="patternfly.org/v4/layouts/level">Level</a> evenly distributes the children
+horizontally within a container.</p>
+<h3 id="bullseye"><a class="header" href="#bullseye">Bullseye</a></h3>
+<p>The <a href="patternfly.org/v4/layouts/bullseye">Bullseye</a> will center the content both
+horizontally and vertically.</p>
+<h3 id="flex"><a class="header" href="#flex">Flex</a></h3>
+<p>The Flex layout allows you to build your own custom layouts that give you the
+same look and feel as the other PatternFly components and layouts. This enables
+developers to create a custom layout that can have consistent spacing and
+change responsively with other PatternFly layouts and components.</p>
+<ul>
+<li><a href="patternfly.org/v4/layouts/flex">Flex</a></li>
+</ul>
 
                     </main>
 
