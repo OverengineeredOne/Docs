@@ -26,10 +26,9 @@ over time, but for now expect rapid breaking changes.
 
 ## Who is this book for?
 
-This book has no expectations on the audience's background. It is ideal for any
-developer who wants to quickly deliver decentralized apps or who are just
-interested to see how this landscape is changing with the next generation of
-the internet.
+This book is ideal for any developer who wants to quickly deliver decentralized
+apps or who are just interested to see how this landscape is changing with the
+next generation of the internet.
 
 ## How to use this book
 
@@ -113,8 +112,8 @@ unforeseen problem.
 - **Template Cluster K3s** - An
   [opinionated](https://github.com/k8s-at-home/template-cluster-k3s)
   template for deploying a single k3s cluster.
-  \_ **Ansible** - [Ansible](https://ansible.com/) is an automation platform for
-  managing automation across devices.
+  - **Ansible** - [Ansible](https://ansible.com/) is an automation platform for
+    managing automation across devices.
   - **Terraform** - [Terraform](https://terraform.io/) provides infrastructure
     as code. We
     use it for managing the Cloudflare domain.
