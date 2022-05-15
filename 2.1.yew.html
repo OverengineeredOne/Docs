@@ -169,7 +169,8 @@ are up to date.</p>
 <h3 id="setting-up-the-yew-project"><a class="header" href="#setting-up-the-yew-project">Setting up the Yew Project</a></h3>
 <p>For this project, we will need to expose the port 8080 so we can load the page
 in the browser later.</p>
-<pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
+<pre><code class="language-rust ignore">docker run -dit --mount src='/home/&lt;username&gt;/oedev_share',target='/home/oe',\
+  type=bind -p 8080:8080 oedev
 </code></pre>
 <p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the
 development environment. We are telling Docker that we want port 8080 to be
@@ -206,7 +207,7 @@ break it down.</p>
 #[function_component(App)]
 fn app() -&gt; Html {
     html! {
-			&lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
+      &lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
     }
 }
 
@@ -241,10 +242,11 @@ with the return value of <code>app()</code>.</p>
 <p>During development we need to be able to view the changes as we develop. This
 is where trunk comes in to help us. Run the following command to build and
 serve the application.</p>
-<pre><code class="language-rust ignore">trunk serve
+<pre><code class="language-rust ignore">trunk serve --address 0.0.0.0
 </code></pre>
-<p>From here you can navigate to your browser and try reaching the webpage with
-the default IP Address. <code>http://172.17.0.1:8080</code></p>
+<p>We set the address to <code>0.0.0.0</code> so it will be exposed to the host machine. From
+here you can navigate to your browser and try reaching the webpage with the
+default IP Address. <code>http://172.17.0.2:8080</code></p>
 <p>Congratulations, you've built your first Yew app!</p>
 <h3 id="watching-changes"><a class="header" href="#watching-changes">Watching changes</a></h3>
 <p>A big part of this development flow is being able to instantly see your changes
@@ -271,10 +273,10 @@ fn app() -&gt; Html {
         Callback::from(move |_| counter.set(*counter + 1))
     };
     html! {
-			&lt;div&gt;
-				&lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
-				&lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
-			&lt;/div&gt;
+      &lt;div&gt;
+        &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
+        &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
+      &lt;/div&gt;
     }
 }
 
@@ -285,11 +287,12 @@ this case <code>0</code>.</p>
 <p>We use <code>counter</code> two ways. One directly in the return value. We <code>dereference</code>
 <code>counter</code> and display that as the &quot;total&quot; value.</p>
 <p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the
-reference and move it's ownship into the <code>Callback</code> struct. You can see
+reference and move it's ownership into the <code>Callback</code> struct. You can see
 <code>onClick</code> being passed into the <code>&lt;button /&gt;</code>'s <code>props</code>. Yew will map the
 onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the &quot;Add One
 Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
-<p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>
+<p>Go ahead and <code>trunk serve --address 0.0.0.0</code>. You can see as you click the
+button and test it out.</p>
 <h3 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h3>
 <p>We are only covering a very small introduction to Yew, just to get your feet
 wet. I'll highly recommend following up with the Yew documentation.</p>

@@ -144,63 +144,74 @@
                     <main>
                         <h1 id="todo-app"><a class="header" href="#todo-app">Todo App</a></h1>
 <p>Now let's apply what we have covered so far and build something useful. We want
-something that can be viewed on desktop mobile, and be feature rich.</p>
+something that can be viewed on desktop, mobile, and be feature rich.</p>
 <p>Let's create a TODO app. As a user I should be able to create a todo and assign
-it to myself or another person. TODOs are automatically generated for daily
+it to themselves or another person. TODOs are automatically generated for daily
 tasks, and some are triggered from an external integration, such as Alexa.
 And we will create some automation to automatically cross off our TODOs. We'll
 add additional features like notifications, change history, and some analytical
 pages or dashboards.</p>
+<p>In this chapter, we will create a bare minimum application and expand on it in
+further chapters.</p>
 <h2 id="create-the-project"><a class="header" href="#create-the-project">Create the project</a></h2>
-<p>We want to clone the patternfly-rs template. If you recall we can easily do
-this with the <code>pwa</code> subcommand of <code>oecli</code>. Again make sure you are logged into
-github <code>gh auth login --with-token &lt;token_file&gt;</code>.</p>
+<p>To get started let's clone the patternfly-rs template. If you recall we can
+easily do this with the <code>pwa</code> subcommand of <code>oecli</code>. Again make sure you are
+logged into github <code>gh auth login --with-token &lt;token_file&gt;</code>.</p>
 <pre><code class="language-rust ignore">oecli pwa --new todo-client
 </code></pre>
 <p>Now you can navigate into the new directory and try serving the page with
-trunk. <code>trunk serve</code> and accessing with your browser as before.</p>
+trunk. <code>trunk serve --address 0.0.0.0</code> and accessing with your browser as
+before.</p>
 <h3 id="template"><a class="header" href="#template">Template</a></h3>
-<p>The default template comes with all the code for the example page. We don't
-really care about it. Inside the <code>./src</code> folder, we can delete everything but
-<code>main.rs</code> and <code>app.rs</code>. If we do this, we can also get rid of all of the
-structs for Yew Routing. The only one we should care about is the struts <code>Model</code></p>
+<p>The default template comes with all the code for the PatternFly example page.
+However, we don't really care about anything outside of main.rs. You can choose
+keep all other files within the <code>./src</code> folder for reference, or you can delete
+them. Ok, let's get started and prep <code>main.rs</code> by creating a new base
+component.</p>
 <pre><code class="language-rust ignore">use patternfly_yew::*;
 use yew::prelude::*;
 
-pub struct Model {}
+pub struct TodoPage {}
 
-impl yew::Component for Model {
+impl yew::Component for TodoPage {
   type Message = ();
   type Properties = ();
+
   fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
     Self {}
   }
 
   fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
-    &lt;&gt;
+    html! {
+      &lt;Page&gt;
 
-    &lt;/&gt;
+      &lt;/Page&gt;
+    }
   }
 }
 
+pub fn main() -&gt; Result&lt;(), JsValue&gt; {
+  wasm_logger::init(wasm_logger::Config::new(Level::Debug));
+  yew::start_app::&lt;TodoPage&gt;();
+  Ok(())
+}
+
 </code></pre>
-<p>You may also notice this is not a function_component, you can go ahead and
-convert that on your own.</p>
+<p>The top level component must be a struct component or you won't be able to call
+<code>start_app()</code>. All other components can be <code>function_components</code>.</p>
 <h2 id="design"><a class="header" href="#design">Design</a></h2>
-<p>Now that we have a blank page we will start simple. We want to have some text
+<p>Now that we have a <code>Page</code> component with no children we want to have some text
 box for entering in a todo and a button to submit. We'll also need to see a
-list of todos and some way to cross them off. We'll stick with these features
-for this chapter.</p>
+list of todos and some way to cross them off. We'll stick with just these
+features for this chapter.</p>
 <p>Let's break down some of the components we'll be using.</p>
-<h3 id="add-a-todo"><a class="header" href="#add-a-todo">Add a todo</a></h3>
-<p>For the new TODO entry, a simple design would be to just place a text box and a
+<h3 id="adding-a-todo"><a class="header" href="#adding-a-todo">Adding a todo</a></h3>
+<p>For the new Todo entry, a simple design would be to just place a text box and a
 button next to each other.</p>
 <pre><code class="language-txt ignore">+---------------------+ +--------+
 |    Text Box         | | Submit |
 +---------------------+ +--------+
 </code></pre>
-<p>We care about the text in the box and when the button is submitted we want to
-&quot;submit&quot; the data that was entered into the text box.</p>
 <p>What Patternfly Components would we need and how would we lay them out? Well we
 can find the Button in the patternfly-rs documentation but nothing that really
 fits the text box. The upstream Patternfly React documentation does have the
@@ -214,36 +225,68 @@ the layouts to find out what works best:
 <pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
 fn new_todo() -&gt; Html {
   html! {
-    &lt;Split gutter=true&gt;
+    &lt;Split&gt;
       &lt;SplitItem&gt;
         &lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
       &lt;/SplitItem&gt;
       &lt;SplitItem&gt;
         &lt;Button
-          disabled={false}
+          disabled=false
           label={ &quot;Create&quot; }
-          variant={Variant::Primary}
+          variant={ Variant::Primary }
         /&gt;
       &lt;/SplitItem&gt;
     &lt;/Split&gt;
   }
 }
 </code></pre>
-<p>You can add this directly in the Model component and use <code>trunk serve</code> it to
-test it out.</p>
-<pre><code class="language-rust ignore">impl yew::Component for Model {
+<p>Looking at the <code>Props</code> we are passing into the <code>TextInput</code> we are passing &quot;New
+TODO&quot; into the placeholder. You can check the bottom of the documentation page
+or the rust docs for more information on what it does.</p>
+<p>Now just add this to a <code>PageSection</code> directly in the <code>TodoPage</code> component and
+use serve the page to test it out.</p>
+<pre><code class="language-rust ignore">impl yew::Component for TodoPage {
+
 ...
-fn view(&amp;self, _:&amp;Context&lt;Self&gt;) -&gt; Html {
+
+fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
   html! {
-    &lt;&gt;
-      &lt;NewTodoBar /&gt;
-    &lt;/&gt;
+    &lt;Page&gt;
+      &lt;PageSection&gt;
+        &lt;NewTodoBar /&gt;
+      &lt;/PageSection&gt;
+    &lt;/Page&gt;
   }
 }
 </code></pre>
-<p>Looks much better than the counter example earlier, but we can still do better.
-Let's find some layouts that might work for us. Our goal is to create something
-like this.</p>
+<p>You may notice that the text box and button are squished together and doesn't
+have the nice padding between them. We can quickly fix this by making sure we
+are using the proper props on the <code>Split</code> and <code>SplitItem</code> layouts.</p>
+<pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
+fn new_todo() -&gt; Html {
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button
+          disabled=false
+          label={ &quot;Create&quot; }
+          variant={ Variant::Primary }
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>The <code>Split</code> component has the gutter prop which will add the padding between
+them. We are also telling the <code>TextInputs</code> parent component to fill up the
+remaining space.</p>
+<p>Now this is looking much better than the counter example earlier, but we can
+still do better. Let's find some more layouts that might work for displaying
+the active todos beneath the <code>NewTodoBar</code> with some padding. Our goal is to
+create something like this.</p>
 <pre><code class="language-txt ignore">+----------------------------------------+
 | +------------------------------------+ |
 | | +---------------------+ +--------+ | |
@@ -252,23 +295,239 @@ like this.</p>
 | +------------------------------------+ |
 |                                        |
 | +------------------------------------+ |
-| |                                    | |
+| | Take out the trash               X | |
+| | Make the bed                     X | |
 | |                                    | |
 | |                                    | |
 | |                                    | |
 | +------------------------------------+ |
 +----------------------------------------+
 </code></pre>
-<p>Where the <code>NewTodoBar</code> component is centered within the parent component and
-the <code>TextInput</code> fills the space up to the button. The parent component should
-fill the width that's available and down to a minium of some value that looks
-good on a mobile display.</p>
-<p>There should be one additional parent that sets a max width. This component
-should also pad the content. Other than the <code>NewTodoBar</code> there should be a
-section to display the current TODOs. We'll use a <code>Card</code> as a placeholder for
-now. All of this should be placed inside a layout.</p>
-<p>These sound like two of the layouts we talked about in the previous chapter.
-<code>&lt;Stack /&gt;</code> and <code>&lt;Split /&gt;</code>.</p>
+<p>So let's create a new component to represent the section below the
+<code>NewTodoBar</code>. We can create a nice visual block for the <code>TodoList</code> with a
+<code>Card</code> component. And to create the vertical list, we can use the <code>Stack</code>
+component.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoList)]
+pub fn todo_list() -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>Now to create a <code>TodoListItem</code> component to represent an individual Todo. This
+component should look almost identical to the <code>NewTodoBar</code> with the exception
+that the button would only render an icon.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoListItem)]
+pub fn todo_list_item() -&gt; Html {
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Text&gt;
+          { &quot;Placeholder&quot; }
+        &lt;/Text&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button&gt;
+          icon={Icon::MinusCircleIcon}
+          variant={Variant::Plain}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Finally simply pass in one or two <code>TodoListItems</code> to the <code>TodoList</code> and take a
+look.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoList)]
+pub fn todo_list() -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+        &lt;TodoListItem /&gt;
+        &lt;TodoListItem /&gt;
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>This looks great, but if you tried to submit nothing actually happens. This is
+where we need to introduce state and callbacks to help manage this. We'll let
+our top level component <code>TodoPage</code> store the todos. This chapter, we'll keep
+the todo's stored as a <code>Vec</code> of <code>Strings</code>.</p>
+<pre><code class="language-rust ignore">
+pub enum Msg {
+  Submit(String),
+  Close(usize),
+}
+
+pub struct TodoPage {
+  todos: Vec&lt;String&gt;,
+}
+
+impl yew::Component for TodoPage {
+
+...
+
+  fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
+    Self { todos: vec![] }
+  }
+
+  fun update(&amp;mut self, _ctx: &amp;Context&lt;Self&gt;, msg: Self::Msg) -&gt; bool {
+    match msg {
+      Msg::Submit(value) =&gt; {
+        self.todos.push(value);
+      }
+      Msg::Close(idx) =&gt; {
+        self.todos.remove(idx);
+      }
+    }
+    true
+  }
+
+...
+
+</code></pre>
+<p>Now let's use the borrowed reference of <code>Context&lt;TodoPage&gt;</code> to create the call
+backs and pass them down the tree.</p>
+<pre><code class="language-rust ignore">...
+
+  fn view(&amp;self, ctx: &amp;Context&lt;Self&gt;) -&gt; Html {
+    Html! {
+      &lt;Page&gt;
+        &lt;PageSection&gt;
+          &lt;NewTodoBar
+            onsubmit={ctx.link().callback(|value: String| Msg::Submit(value)}
+          /&gt;
+        &lt;/PageSection&gt;
+        &lt;PageSection&gt;
+          &lt;TodoList
+            onclose={ctx.link().callback(|idx: usize| Msg::Close(idx)}
+            todos={self.todos.clone()}
+          /&gt;
+        &lt;/PageSection&gt;
+      &lt;/Page&gt;
+    }
+  }
+</code></pre>
+<p>We added these new props, but they don't actually exist on each component yet.
+Let's make sure we add those.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct NewTodoProps {
+  pub onsubmit: Callback&lt;String&gt;
+}
+
+#[function_component(NewTodoBar)]
+pub fn new_todo(props: &amp;NewTodoProps) -&gt; Html {
+  let text: UseStateHandle&lt;String&gt; = use_state(|| &quot;&quot;.to_string());
+  let on_text_change = {
+    let text = text.clone();
+    Callback::from(move |value: String| text.set(value.clone()))
+  };
+  let cb = props.onsubmit.clone();
+  let onsubmit = {
+    let text = text.clone();
+    Callback::from(move |_| {
+      cb.emit((*text).clone());
+      text.set(&quot;&quot;.to_string());
+    })
+  };
+
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;TextInput
+          placeholder={ &quot;New TODO Title&quot; }
+          onchange={on_text_change}
+          r#type={ &quot;text&quot; }
+          value={(*text).clone()}
+        /&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Button
+          disabled=false
+          label={ &quot;Create&quot; }
+          onclick={onsubmit}
+          variant={Variant::Primary}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Now we can update the <code>TodoList</code> with the new <code>Props</code> and use an iterator for
+each of the StackItems.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct TodoListProps {
+  pub onclose: Callback&lt;usize&gt;,
+  pub todos: Vec&lt;String&gt;,
+}
+
+#[function_component(TodoList)]
+pub fn todo_list(props: TodoListProps) -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+        {props.todos.iter().enumerate().map(|(idx, todo)| {
+          html! {
+            &lt;StackItem&gt;
+              &lt;TodoListItem
+                onclose={props.onclose.clone()}
+                todo={todo.to_owned()}
+                {idx}
+              /&gt;
+            &lt;/StackItem&gt;
+          }
+        }).collect::&lt;Html&gt;()}
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>And finally the last component to update is the <code>TodoListItem</code>.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct TodoListItemProps {
+  pub idx: usize,
+  pub onclose: Callback&lt;usize&gt;,
+  pub todo: String,
+}
+
+#[function_component(TodoListItem)]
+pub fn todo_list_item(props: &amp;TodoListItemProps) -&gt; Html {
+  let TodoListItemProps { idx, onclose, todo } = props;
+  let close_cb = onclose.clone();
+  let close = {
+    let idx = idx.clone();
+    Callback::from(move |_| close_cb.emit(idx.clone())
+  };
+
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Text&gt;
+          { todo.clone() }
+        &lt;/Text&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button&gt;
+          icon={Icon::MinusCircleIcon}
+          onclick={close}
+          variant={Variant::Plain}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Congratulations, now when we head to the browser and check it out, we'll be
+able to type in text and click the submit button. The text will be cleared and
+we'll have a working list below. Any time you click the minus symbol it will
+delete the TODO.</p>
+<p>In the next set of chapters we'll take a look at different ways to host a yew
+app other than Trunk. Between now and then I'd recommend cleaning up the code
+and taking a look at the provided <a href="">example</a>.</p>
 
                     </main>
 

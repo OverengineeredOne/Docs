@@ -259,7 +259,7 @@ be covered in later chapters.</p>
 <p>The source files from this book can be found in the github repo
 <a href="https://github.com/overengineered/docs">GitHub</a> and will be found under the
 folder following the folder naming pattern of
-<code>booktitle-chapter-section-title</code>.</p>
+<code>chapter-section-title</code>.</p>
 <h2 id="stack"><a class="header" href="#stack">Stack</a></h2>
 <p>Briefly let's cover the stack that we will be working with. Later we'll have a
 gentle introduction to many of them and others may not require direct
@@ -338,7 +338,7 @@ development environment and tools. We accomplish this by utilizing Docker and
 in the future will provide a web based environment. We will go into more detail
 in the following chapters, but for now know, Our image has Ubuntu as the base
 image. Also comes with all the tools preinstalled to follow along with the
-Overengineered books.</p>
+Overengineered book(s).</p>
 <h2 id="installing-docker"><a class="header" href="#installing-docker">Installing Docker</a></h2>
 <h3 id="ubuntu-and-debian-based-operating-systems-including-raspberry-pi"><a class="header" href="#ubuntu-and-debian-based-operating-systems-including-raspberry-pi">Ubuntu and Debian based Operating Systems including Raspberry Pi</a></h3>
 <p>You can find install instructions for ubuntu at
@@ -351,13 +351,13 @@ with Docker quickly. Go ahead and copy paste this into your terminal.</p>
 <a href="https://github.com/OverengineeredOne/easy-docker-setup">github</a></p>
 <h4 id="set-up-overengineered"><a class="header" href="#set-up-overengineered">Set up Overengineered</a></h4>
 <p>Everything's shiny captain, a development environment doesn't exist yet. If you
-read ahead you can build from the source.</p>
+read ahead you can find instructions to build it from the source.</p>
 <h3 id="mac-os-x"><a class="header" href="#mac-os-x">Mac Os X</a></h3>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
 <p><strong>Note</strong>: Will likely provide instructions for a VM using hypervisor.</p>
 <h2 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h2>
 <p>Since the entire development environment is a container image, we can download
-the source from github and build it our selves.</p>
+the Dockerfile from github and build it our selves.</p>
 <p>For this we'll need to make sure we have git installed.</p>
 <pre><code class="language-rust ignore">apt install git-all
 </code></pre>
@@ -372,11 +372,10 @@ the source from github and build it our selves.</p>
 installation of all the dependencies and tools hassle free, we created a Docker
 image that has all of these prepackaged for convenience.</p>
 <p>If you are not familiar with Docker, it is a quick and secure way to package
-applications consistently and just work. Docker is similar to a virtual
-operating system were it only shares the kernel with the underlying system. It
-provides a declarative interface to compose images and can be published onto
-repositories. This makes it easy to share, not just code, but all the
-requirements including the environment.</p>
+applications consistently that just work. Docker is similar to a virtual
+operating system were it only shares the kernel with the underlying host system.
+It provides a declarative interface to compose images and can be published onto
+repositories.</p>
 <p>Once the images are created, they can be cold started extremely quickly which
 is what we want.</p>
 <h2 id="launching-the-environment"><a class="header" href="#launching-the-environment">Launching the environment</a></h2>
@@ -385,7 +384,8 @@ and we can then connect to it with <code>ssh</code>.</p>
 <pre><code class="language-rust ignore">docker run -dit oedev
 </code></pre>
 <p>In this case the <code>d</code> flag is indicating that we want run the container in the
-background. The <code>it</code> will ensure it remains up and interactive.</p>
+background. The <code>i</code> will ensure it remains up and interactive and <code>t</code> allocates
+a TTY.</p>
 <p>After the command is run the Docker container should boot up quickly. We can
 use the container list command to make sure it's running.</p>
 <pre><code class="language-rust ignore">docker container ls
@@ -430,9 +430,9 @@ this as our home directory in the container.</p>
 <p>We can touch a file in that directory to make sure it works.</p>
 <pre><code class="language-rust ignore">touch ~/oedev_share/test
 </code></pre>
-<p>Now we can run the image and mount that directory.</p>
+<p>Now we can run the image, this time mounting that directory.</p>
 <pre><code class="language-rust ignore">docker run -dit --mount src='/home/&lt;username&gt;/oedev_share',target='/home/oe',\
-type=bind oedev
+  type=bind oedev
 </code></pre>
 <p>Just ssh in like we have before and you should see the <code>test</code> file in the
 current directory.</p>
@@ -447,11 +447,10 @@ new password, and have you confirm it.</p>
 in. This process is simple, we just need to run one command. But first let's
 grab a personal access token. Instructions can be found at the
 <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">github docs</a>.</p>
-<p>To make this easier we've include the instructions here, but they can be found
-in the developer settings.</p>
+<p>To make this easier we've include the instructions here.</p>
 <ul>
-<li>In the upper-right corner of any page, click on your <code>profile photo</code> and
-<code>settings</code>.</li>
+<li>In the upper-right corner of any Github page, click on your <code>profile photo</code>
+and <code>settings</code>.</li>
 <li>In the left navigation bar click on <code>Developer settings</code>.</li>
 <li>Then in the left panel click <code>Personal access tokens</code>.</li>
 <li>Select the correct scope. You'll likely want repo, and read:org.</li>
@@ -467,8 +466,7 @@ file we created in the previous step.</p>
 <p>Now we can use it to login with the Github Command Line Interface.</p>
 <pre><code class="language-bash ignore">gh auth login --with-token &lt; ~/ghtoken.txt
 </code></pre>
-<p><strong>Note:</strong> This step will have to be done each time you launch the dev
-environment.</p>
+<p><strong>Note:</strong> This step will have to be done each time the container is restarted.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-interface"><a class="header" href="#command-line-interface">Command Line Interface</a></h1>
 <p>The development environment ships with a command line tool to help take care of
 a lot of the boilerplate and configuration within Overengineered.</p>
@@ -483,7 +481,7 @@ can use the help section.</p>
 <pre><code class="language-rust ignore">oecli --help
 </code></pre>
 <p>We will dive into more details into the individual commands in the upcoming
-chapters as they are introduced.</p>
+chapters on an as needed basis.</p>
 <h2 id="manual-installation"><a class="header" href="#manual-installation">Manual Installation</a></h2>
 <p>If you are not within the Overengineered dev environment you can install
 <code>oecli</code> through Cargo.</p>
@@ -543,7 +541,8 @@ are up to date.</p>
 <h3 id="setting-up-the-yew-project"><a class="header" href="#setting-up-the-yew-project">Setting up the Yew Project</a></h3>
 <p>For this project, we will need to expose the port 8080 so we can load the page
 in the browser later.</p>
-<pre><code class="language-rust ignore">docker run -it -p 8080:8080 oedev /bin/bash
+<pre><code class="language-rust ignore">docker run -dit --mount src='/home/&lt;username&gt;/oedev_share',target='/home/oe',\
+  type=bind -p 8080:8080 oedev
 </code></pre>
 <p>Here we are adding <code>-p 8080:8080</code> to the earlier command to launch the
 development environment. We are telling Docker that we want port 8080 to be
@@ -580,7 +579,7 @@ break it down.</p>
 #[function_component(App)]
 fn app() -&gt; Html {
     html! {
-			&lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
+      &lt;h1&gt;{ &quot;Hello, World!&quot; }&lt;/h1&gt;
     }
 }
 
@@ -615,10 +614,11 @@ with the return value of <code>app()</code>.</p>
 <p>During development we need to be able to view the changes as we develop. This
 is where trunk comes in to help us. Run the following command to build and
 serve the application.</p>
-<pre><code class="language-rust ignore">trunk serve
+<pre><code class="language-rust ignore">trunk serve --address 0.0.0.0
 </code></pre>
-<p>From here you can navigate to your browser and try reaching the webpage with
-the default IP Address. <code>http://172.17.0.1:8080</code></p>
+<p>We set the address to <code>0.0.0.0</code> so it will be exposed to the host machine. From
+here you can navigate to your browser and try reaching the webpage with the
+default IP Address. <code>http://172.17.0.2:8080</code></p>
 <p>Congratulations, you've built your first Yew app!</p>
 <h3 id="watching-changes"><a class="header" href="#watching-changes">Watching changes</a></h3>
 <p>A big part of this development flow is being able to instantly see your changes
@@ -645,10 +645,10 @@ fn app() -&gt; Html {
         Callback::from(move |_| counter.set(*counter + 1))
     };
     html! {
-			&lt;div&gt;
-				&lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
-				&lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
-			&lt;/div&gt;
+      &lt;div&gt;
+        &lt;button {onclick}&gt;{ &quot;Add one&quot; }&lt;/button&gt;
+        &lt;p&gt;{ &quot;Total: &quot; }{ *counter }&lt;/p&gt;
+      &lt;/div&gt;
     }
 }
 
@@ -659,11 +659,12 @@ this case <code>0</code>.</p>
 <p>We use <code>counter</code> two ways. One directly in the return value. We <code>dereference</code>
 <code>counter</code> and display that as the &quot;total&quot; value.</p>
 <p>The other is in the <code>onClick</code> <code>handle</code>. Inside this callback we clone the
-reference and move it's ownship into the <code>Callback</code> struct. You can see
+reference and move it's ownership into the <code>Callback</code> struct. You can see
 <code>onClick</code> being passed into the <code>&lt;button /&gt;</code>'s <code>props</code>. Yew will map the
 onclick <code>HTMLEvent</code> to this <code>onClick</code> function you defined. When the &quot;Add One
 Button&quot; is clicked you will see the <code>counter</code>'s value get set to <code>counter + 1</code>.</p>
-<p>Go ahead and <code>trunk serve</code>. You can see as you click the button and test it out.</p>
+<p>Go ahead and <code>trunk serve --address 0.0.0.0</code>. You can see as you click the
+button and test it out.</p>
 <h3 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h3>
 <p>We are only covering a very small introduction to Yew, just to get your feet
 wet. I'll highly recommend following up with the Yew documentation.</p>
@@ -711,6 +712,15 @@ found on the left navigation bar.</p>
 <p>In Patternfly there are seven different layouts to help compose your web app.
 We can briefly cover each of them and what they are good for. Be sure to check
 out associated links to follow along with visual representations.</p>
+<h3 id="page"><a class="header" href="#page">Page</a></h3>
+<p>The <a href="patternfly.org/v4/components/page/design-guidelines">Page</a> is technically
+a component, but makes sense in the context of talking about page layouts. It
+is used to define the basic layout of a page, with multiple option of page
+navigation, and provide common elements like the masthead and page header.</p>
+<h4 id="page-sections"><a class="header" href="#page-sections">Page Sections</a></h4>
+<p>The page sections, also described in the page guidelines, allows you to define
+areas to group content. Depending on the size of the device the padding on the
+sides will be automatically adjusted to attempt to fit the content.</p>
 <h3 id="stack-1"><a class="header" href="#stack-1">Stack</a></h3>
 <p>A <a href="patternfly.org/v4/layouts/stack">stack</a> will position items vertically in a
 container. Optionally one item can be used to fill the remaining space. All
@@ -786,63 +796,74 @@ current state, Overengineered does not offer server side rendering, or this
 progressive hydration. These are goals further down the road map.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="todo-app"><a class="header" href="#todo-app">Todo App</a></h1>
 <p>Now let's apply what we have covered so far and build something useful. We want
-something that can be viewed on desktop mobile, and be feature rich.</p>
+something that can be viewed on desktop, mobile, and be feature rich.</p>
 <p>Let's create a TODO app. As a user I should be able to create a todo and assign
-it to myself or another person. TODOs are automatically generated for daily
+it to themselves or another person. TODOs are automatically generated for daily
 tasks, and some are triggered from an external integration, such as Alexa.
 And we will create some automation to automatically cross off our TODOs. We'll
 add additional features like notifications, change history, and some analytical
 pages or dashboards.</p>
+<p>In this chapter, we will create a bare minimum application and expand on it in
+further chapters.</p>
 <h2 id="create-the-project"><a class="header" href="#create-the-project">Create the project</a></h2>
-<p>We want to clone the patternfly-rs template. If you recall we can easily do
-this with the <code>pwa</code> subcommand of <code>oecli</code>. Again make sure you are logged into
-github <code>gh auth login --with-token &lt;token_file&gt;</code>.</p>
+<p>To get started let's clone the patternfly-rs template. If you recall we can
+easily do this with the <code>pwa</code> subcommand of <code>oecli</code>. Again make sure you are
+logged into github <code>gh auth login --with-token &lt;token_file&gt;</code>.</p>
 <pre><code class="language-rust ignore">oecli pwa --new todo-client
 </code></pre>
 <p>Now you can navigate into the new directory and try serving the page with
-trunk. <code>trunk serve</code> and accessing with your browser as before.</p>
+trunk. <code>trunk serve --address 0.0.0.0</code> and accessing with your browser as
+before.</p>
 <h3 id="template"><a class="header" href="#template">Template</a></h3>
-<p>The default template comes with all the code for the example page. We don't
-really care about it. Inside the <code>./src</code> folder, we can delete everything but
-<code>main.rs</code> and <code>app.rs</code>. If we do this, we can also get rid of all of the
-structs for Yew Routing. The only one we should care about is the struts <code>Model</code></p>
+<p>The default template comes with all the code for the PatternFly example page.
+However, we don't really care about anything outside of main.rs. You can choose
+keep all other files within the <code>./src</code> folder for reference, or you can delete
+them. Ok, let's get started and prep <code>main.rs</code> by creating a new base
+component.</p>
 <pre><code class="language-rust ignore">use patternfly_yew::*;
 use yew::prelude::*;
 
-pub struct Model {}
+pub struct TodoPage {}
 
-impl yew::Component for Model {
+impl yew::Component for TodoPage {
   type Message = ();
   type Properties = ();
+
   fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
     Self {}
   }
 
   fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
-    &lt;&gt;
+    html! {
+      &lt;Page&gt;
 
-    &lt;/&gt;
+      &lt;/Page&gt;
+    }
   }
 }
 
+pub fn main() -&gt; Result&lt;(), JsValue&gt; {
+  wasm_logger::init(wasm_logger::Config::new(Level::Debug));
+  yew::start_app::&lt;TodoPage&gt;();
+  Ok(())
+}
+
 </code></pre>
-<p>You may also notice this is not a function_component, you can go ahead and
-convert that on your own.</p>
+<p>The top level component must be a struct component or you won't be able to call
+<code>start_app()</code>. All other components can be <code>function_components</code>.</p>
 <h2 id="design"><a class="header" href="#design">Design</a></h2>
-<p>Now that we have a blank page we will start simple. We want to have some text
+<p>Now that we have a <code>Page</code> component with no children we want to have some text
 box for entering in a todo and a button to submit. We'll also need to see a
-list of todos and some way to cross them off. We'll stick with these features
-for this chapter.</p>
+list of todos and some way to cross them off. We'll stick with just these
+features for this chapter.</p>
 <p>Let's break down some of the components we'll be using.</p>
-<h3 id="add-a-todo"><a class="header" href="#add-a-todo">Add a todo</a></h3>
-<p>For the new TODO entry, a simple design would be to just place a text box and a
+<h3 id="adding-a-todo"><a class="header" href="#adding-a-todo">Adding a todo</a></h3>
+<p>For the new Todo entry, a simple design would be to just place a text box and a
 button next to each other.</p>
 <pre><code class="language-txt ignore">+---------------------+ +--------+
 |    Text Box         | | Submit |
 +---------------------+ +--------+
 </code></pre>
-<p>We care about the text in the box and when the button is submitted we want to
-&quot;submit&quot; the data that was entered into the text box.</p>
 <p>What Patternfly Components would we need and how would we lay them out? Well we
 can find the Button in the patternfly-rs documentation but nothing that really
 fits the text box. The upstream Patternfly React documentation does have the
@@ -856,36 +877,68 @@ the layouts to find out what works best:
 <pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
 fn new_todo() -&gt; Html {
   html! {
-    &lt;Split gutter=true&gt;
+    &lt;Split&gt;
       &lt;SplitItem&gt;
         &lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
       &lt;/SplitItem&gt;
       &lt;SplitItem&gt;
         &lt;Button
-          disabled={false}
+          disabled=false
           label={ &quot;Create&quot; }
-          variant={Variant::Primary}
+          variant={ Variant::Primary }
         /&gt;
       &lt;/SplitItem&gt;
     &lt;/Split&gt;
   }
 }
 </code></pre>
-<p>You can add this directly in the Model component and use <code>trunk serve</code> it to
-test it out.</p>
-<pre><code class="language-rust ignore">impl yew::Component for Model {
+<p>Looking at the <code>Props</code> we are passing into the <code>TextInput</code> we are passing &quot;New
+TODO&quot; into the placeholder. You can check the bottom of the documentation page
+or the rust docs for more information on what it does.</p>
+<p>Now just add this to a <code>PageSection</code> directly in the <code>TodoPage</code> component and
+use serve the page to test it out.</p>
+<pre><code class="language-rust ignore">impl yew::Component for TodoPage {
+
 ...
-fn view(&amp;self, _:&amp;Context&lt;Self&gt;) -&gt; Html {
+
+fn view(&amp;self, _: &amp;Context&lt;Self&gt;) -&gt; Html {
   html! {
-    &lt;&gt;
-      &lt;NewTodoBar /&gt;
-    &lt;/&gt;
+    &lt;Page&gt;
+      &lt;PageSection&gt;
+        &lt;NewTodoBar /&gt;
+      &lt;/PageSection&gt;
+    &lt;/Page&gt;
   }
 }
 </code></pre>
-<p>Looks much better than the counter example earlier, but we can still do better.
-Let's find some layouts that might work for us. Our goal is to create something
-like this.</p>
+<p>You may notice that the text box and button are squished together and doesn't
+have the nice padding between them. We can quickly fix this by making sure we
+are using the proper props on the <code>Split</code> and <code>SplitItem</code> layouts.</p>
+<pre><code class="language-rust ignore">#[function_component(NewTodoBar)]
+fn new_todo() -&gt; Html {
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;TextInput placeholder={ &quot;New TODO&quot; } /&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button
+          disabled=false
+          label={ &quot;Create&quot; }
+          variant={ Variant::Primary }
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>The <code>Split</code> component has the gutter prop which will add the padding between
+them. We are also telling the <code>TextInputs</code> parent component to fill up the
+remaining space.</p>
+<p>Now this is looking much better than the counter example earlier, but we can
+still do better. Let's find some more layouts that might work for displaying
+the active todos beneath the <code>NewTodoBar</code> with some padding. Our goal is to
+create something like this.</p>
 <pre><code class="language-txt ignore">+----------------------------------------+
 | +------------------------------------+ |
 | | +---------------------+ +--------+ | |
@@ -894,23 +947,239 @@ like this.</p>
 | +------------------------------------+ |
 |                                        |
 | +------------------------------------+ |
-| |                                    | |
+| | Take out the trash               X | |
+| | Make the bed                     X | |
 | |                                    | |
 | |                                    | |
 | |                                    | |
 | +------------------------------------+ |
 +----------------------------------------+
 </code></pre>
-<p>Where the <code>NewTodoBar</code> component is centered within the parent component and
-the <code>TextInput</code> fills the space up to the button. The parent component should
-fill the width that's available and down to a minium of some value that looks
-good on a mobile display.</p>
-<p>There should be one additional parent that sets a max width. This component
-should also pad the content. Other than the <code>NewTodoBar</code> there should be a
-section to display the current TODOs. We'll use a <code>Card</code> as a placeholder for
-now. All of this should be placed inside a layout.</p>
-<p>These sound like two of the layouts we talked about in the previous chapter.
-<code>&lt;Stack /&gt;</code> and <code>&lt;Split /&gt;</code>.</p>
+<p>So let's create a new component to represent the section below the
+<code>NewTodoBar</code>. We can create a nice visual block for the <code>TodoList</code> with a
+<code>Card</code> component. And to create the vertical list, we can use the <code>Stack</code>
+component.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoList)]
+pub fn todo_list() -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>Now to create a <code>TodoListItem</code> component to represent an individual Todo. This
+component should look almost identical to the <code>NewTodoBar</code> with the exception
+that the button would only render an icon.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoListItem)]
+pub fn todo_list_item() -&gt; Html {
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Text&gt;
+          { &quot;Placeholder&quot; }
+        &lt;/Text&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button&gt;
+          icon={Icon::MinusCircleIcon}
+          variant={Variant::Plain}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Finally simply pass in one or two <code>TodoListItems</code> to the <code>TodoList</code> and take a
+look.</p>
+<pre><code class="language-rust ignore">#[function_component(TodoList)]
+pub fn todo_list() -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+        &lt;TodoListItem /&gt;
+        &lt;TodoListItem /&gt;
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>This looks great, but if you tried to submit nothing actually happens. This is
+where we need to introduce state and callbacks to help manage this. We'll let
+our top level component <code>TodoPage</code> store the todos. This chapter, we'll keep
+the todo's stored as a <code>Vec</code> of <code>Strings</code>.</p>
+<pre><code class="language-rust ignore">
+pub enum Msg {
+  Submit(String),
+  Close(usize),
+}
+
+pub struct TodoPage {
+  todos: Vec&lt;String&gt;,
+}
+
+impl yew::Component for TodoPage {
+
+...
+
+  fn create(_: &amp;Context&lt;Self&gt;) -&gt; Self {
+    Self { todos: vec![] }
+  }
+
+  fun update(&amp;mut self, _ctx: &amp;Context&lt;Self&gt;, msg: Self::Msg) -&gt; bool {
+    match msg {
+      Msg::Submit(value) =&gt; {
+        self.todos.push(value);
+      }
+      Msg::Close(idx) =&gt; {
+        self.todos.remove(idx);
+      }
+    }
+    true
+  }
+
+...
+
+</code></pre>
+<p>Now let's use the borrowed reference of <code>Context&lt;TodoPage&gt;</code> to create the call
+backs and pass them down the tree.</p>
+<pre><code class="language-rust ignore">...
+
+  fn view(&amp;self, ctx: &amp;Context&lt;Self&gt;) -&gt; Html {
+    Html! {
+      &lt;Page&gt;
+        &lt;PageSection&gt;
+          &lt;NewTodoBar
+            onsubmit={ctx.link().callback(|value: String| Msg::Submit(value)}
+          /&gt;
+        &lt;/PageSection&gt;
+        &lt;PageSection&gt;
+          &lt;TodoList
+            onclose={ctx.link().callback(|idx: usize| Msg::Close(idx)}
+            todos={self.todos.clone()}
+          /&gt;
+        &lt;/PageSection&gt;
+      &lt;/Page&gt;
+    }
+  }
+</code></pre>
+<p>We added these new props, but they don't actually exist on each component yet.
+Let's make sure we add those.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct NewTodoProps {
+  pub onsubmit: Callback&lt;String&gt;
+}
+
+#[function_component(NewTodoBar)]
+pub fn new_todo(props: &amp;NewTodoProps) -&gt; Html {
+  let text: UseStateHandle&lt;String&gt; = use_state(|| &quot;&quot;.to_string());
+  let on_text_change = {
+    let text = text.clone();
+    Callback::from(move |value: String| text.set(value.clone()))
+  };
+  let cb = props.onsubmit.clone();
+  let onsubmit = {
+    let text = text.clone();
+    Callback::from(move |_| {
+      cb.emit((*text).clone());
+      text.set(&quot;&quot;.to_string());
+    })
+  };
+
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;TextInput
+          placeholder={ &quot;New TODO Title&quot; }
+          onchange={on_text_change}
+          r#type={ &quot;text&quot; }
+          value={(*text).clone()}
+        /&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Button
+          disabled=false
+          label={ &quot;Create&quot; }
+          onclick={onsubmit}
+          variant={Variant::Primary}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Now we can update the <code>TodoList</code> with the new <code>Props</code> and use an iterator for
+each of the StackItems.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct TodoListProps {
+  pub onclose: Callback&lt;usize&gt;,
+  pub todos: Vec&lt;String&gt;,
+}
+
+#[function_component(TodoList)]
+pub fn todo_list(props: TodoListProps) -&gt; Html {
+  html! {
+    &lt;Card&gt;
+      &lt;Stack&gt;
+        {props.todos.iter().enumerate().map(|(idx, todo)| {
+          html! {
+            &lt;StackItem&gt;
+              &lt;TodoListItem
+                onclose={props.onclose.clone()}
+                todo={todo.to_owned()}
+                {idx}
+              /&gt;
+            &lt;/StackItem&gt;
+          }
+        }).collect::&lt;Html&gt;()}
+      &lt;/Stack&gt;
+    &lt;/Card&gt;
+  }
+}
+</code></pre>
+<p>And finally the last component to update is the <code>TodoListItem</code>.</p>
+<pre><code class="language-rust ignore">#[derive(Clone, Properties, PartialEq)]
+pub struct TodoListItemProps {
+  pub idx: usize,
+  pub onclose: Callback&lt;usize&gt;,
+  pub todo: String,
+}
+
+#[function_component(TodoListItem)]
+pub fn todo_list_item(props: &amp;TodoListItemProps) -&gt; Html {
+  let TodoListItemProps { idx, onclose, todo } = props;
+  let close_cb = onclose.clone();
+  let close = {
+    let idx = idx.clone();
+    Callback::from(move |_| close_cb.emit(idx.clone())
+  };
+
+  html! {
+    &lt;Split gutter=true&gt;
+      &lt;SplitItem fill=true&gt;
+        &lt;Text&gt;
+          { todo.clone() }
+        &lt;/Text&gt;
+      &lt;/SplitItem&gt;
+      &lt;SplitItem&gt;
+        &lt;Button&gt;
+          icon={Icon::MinusCircleIcon}
+          onclick={close}
+          variant={Variant::Plain}
+        /&gt;
+      &lt;/SplitItem&gt;
+    &lt;/Split&gt;
+  }
+}
+</code></pre>
+<p>Congratulations, now when we head to the browser and check it out, we'll be
+able to type in text and click the submit button. The text will be cleared and
+we'll have a working list below. Any time you click the minus symbol it will
+delete the TODO.</p>
+<p>In the next set of chapters we'll take a look at different ways to host a yew
+app other than Trunk. Between now and then I'd recommend cleaning up the code
+and taking a look at the provided <a href="">example</a>.</p>
 
                     </main>
 
