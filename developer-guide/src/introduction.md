@@ -50,7 +50,7 @@ be covered in later chapters.
 The source files from this book can be found in the github repo
 [GitHub](https://github.com/overengineered/docs) and will be found under the
 folder following the folder naming pattern of
-`booktitle-chapter-section-title`.
+`chapter-section-title`.
 
 ## Stack
 
