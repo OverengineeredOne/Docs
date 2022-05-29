@@ -12,7 +12,7 @@ amount of problems. We then break down each requirement into a working spec.
 The spec is a [mdBook](https://rust-lang.github.io/mdBook/index.html).
 
 Placeholder Link:
-[https://overengineeredone.github.io/docs/](https://overengineeredone.github.io/docs/)
+[github.com/OverengineeredOne/oespec](https://overengineeredone.github.io/oespec/)
 
 ## Developer Guide
 
