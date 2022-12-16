@@ -5,6 +5,11 @@ platform allows developers to move design, program, and distribute a wide range
 of applications. Our tools are all fully open source and serve as examples
 using our infrastructure.
 
+# Archived
+
+Parts of this MD Book were planned to move out and split between OEDev and
+OEBook. These have now entered archived the bone yard.
+
 ## Overengineered Spec
 
 We are beginning to layout a series of feature requirements to solve a sizeable
